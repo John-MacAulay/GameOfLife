@@ -10,7 +10,6 @@ The universe of the Game of Life is a two-dimensional orthogonal grid of square 
 
 If the cell is on the fringe of the grid it laps over to the other side:
 
-![Cell Overlap](cell-overlap.png)
 
 At each step in time, the following transitions occur:
 
@@ -21,7 +20,6 @@ At each step in time, the following transitions occur:
 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed. Births and deaths happen simultaneously, and the discrete moment at which this happens is sometimes called a tick. The rules continue to be applied repeatedly to create further generations.
 
-![Example of Evolution](Game_of_life_toad.gif)
 
 ## Task
 
