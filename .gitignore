@@ -9,6 +9,13 @@ bld/
 **/[Bb]in/
 [Oo]bj/
 [Ll]og/
+build/
+Build_Output/
+PublishProfiles/
+[Bb]in/
+msbuild.log
+msbuild.err
+msbuild.wrn
 
 # User-specific files
 *.suo
@@ -16,7 +23,31 @@ bld/
 *.userosscache
 *.sln.docstates
 *.DS_Store
+appsettings.local.json
 
 /.vscode/
 .fake
 .ionide
+
+*.pdf
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+*.orig
+
+# Visual Studio 2015
+.vs/
+/src/packages
+**/*/test.log
+*/*/logs/
+
+*.crt
+*.pfx
+
+*/node_modules/
+/src/.nuget/NuGet.Config
+*.key
+**/.idea/
+test.log
