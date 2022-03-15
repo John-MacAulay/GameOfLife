@@ -8,5 +8,10 @@ namespace GameOfLife
         {
             _output = output;
         }
+
+        public void PromptForWorldParameter(string gridParameter)
+        {
+            _output.PrintText($"Please enter the grid {gridParameter} for this Game of Life.");
+        }
     }
 }
