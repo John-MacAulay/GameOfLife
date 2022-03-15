@@ -32,6 +32,8 @@ namespace GameOfLifeTests
         [InlineData(8, 10, "0,-1")]
         [InlineData(15, 10, "15,0")]
         [InlineData(14, 10, "15,10")]
+        [InlineData(14, 10, "7")]
+        [InlineData(14, 10, "3,3,3")]
         public void
             TryParseStringToPosition_WhenGivenIntParsableString_WithValuesOutsideWorldParameterRange_WillReturnFalse(
                 int worldLength, int worldHeight, string stringToCheck)
@@ -65,6 +67,8 @@ namespace GameOfLifeTests
         [Theory]
         [InlineData(20, 15, "-1,5")]
         [InlineData(20, 15, "7,25")]
+        [InlineData(20, 15, "7,8,14")]
+        [InlineData(20, 15, "7")]
         public void
             ValidatedPosition_WillReturnNull_WhenPreviousTryParseStringToPositionWasFalse
             (int worldLength, int worldHeight, string stringToCheck)
@@ -89,6 +93,7 @@ namespace GameOfLifeTests
                 "3,4",
                 new Position(3,4)
             };
+           
         }
         
         [Theory]
@@ -102,6 +107,52 @@ namespace GameOfLifeTests
             var validator = new WorldPositionValidator(world);
             var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
             
+            // Act 
+            var actual = validator.ValidatedPosition;
+            
+            // Assert 
+            Assert.Equal(expectedValidatedPosition,actual);
+
+        }
+        public static IEnumerable<object[]> GetInputs2()
+        {
+            yield return new object[]
+            {
+                10,
+                15,
+                "3,4",
+                "4,5",
+                new Position(4,5)
+            };
+            yield return new object[]
+            {
+                10,
+                15,
+                "3,4",
+                "-1,5",
+                null
+            };
+            yield return new object[]
+            {
+                10,
+                15,
+                "30,12,13",
+                "9,10",
+                new Position(9,10)
+            };
+        }
+        
+        [Theory]
+        [MemberData(nameof(GetInputs2))]
+        public void
+            GivenMultipleStringsToCheck_ValidatedPosition_WillReturnLastValidatedPosition_OrNull_DependantOnLastTryParseStringToPosition
+            (int worldLength, int worldHeight, string stringToCheck, string secondCheckedString,Position expectedValidatedPosition)
+        {
+            // Arrange
+            var world = new World(worldLength, worldHeight);
+            var validator = new WorldPositionValidator(world);
+            var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
+            var secondValidationIsTrue = validator.TryParseStringToPosition(secondCheckedString);
             // Act 
             var actual = validator.ValidatedPosition;
             
