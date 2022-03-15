@@ -60,9 +60,9 @@ namespace GameOfLife
             _display.PromptForLiveCellSeedPosition();
             response = _input.GetText();
             var worldPositionValidator = new WorldPositionValidator(world);
-            if (worldPositionValidator.TryParseStringResponseToPosition(response))
+            if (worldPositionValidator.TryParseStringToPosition(response))
             {
-                positionsForLiveCells.Add(worldPositionValidator.ReturnValidatedPosition);
+                positionsForLiveCells.Add(worldPositionValidator.ValidatedPosition);
             }
 
             return response;

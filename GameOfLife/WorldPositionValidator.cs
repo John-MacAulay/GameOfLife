@@ -10,10 +10,11 @@ namespace GameOfLife
             _world = world;
         }
 
-        public Position ReturnValidatedPosition { get; private set; }
+        public Position ValidatedPosition { get; private set; }
 
-        public bool TryParseStringResponseToPosition(string toCheck)
+        public bool TryParseStringToPosition(string toCheck)
         {
+            ValidatedPosition = null;
             var splitString = toCheck.Split(',');
             if (splitString.Length != WorldDimensionalParameters)
             {
@@ -37,7 +38,7 @@ namespace GameOfLife
                 return false;
             }
 
-            ReturnValidatedPosition = new Position(potentialRow, potentialColumn);
+            ValidatedPosition = new Position( potentialColumn, potentialRow);
 
             return true;
         }
