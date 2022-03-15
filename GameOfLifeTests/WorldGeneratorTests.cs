@@ -11,7 +11,7 @@ namespace GameOfLifeTests
         {
             // Arrange 
             var output = new TestOutput();
-            var input = new TestInput(new[] {"10","15"});
+            var input = new TestInput(new[] {"10","15","q"});
             var generator = new WorldGenerator(output, input);
             
             // Act
@@ -33,7 +33,7 @@ namespace GameOfLifeTests
         {
             // Arrange 
             var output = new TestOutput();
-            var input = new TestInput(new[] {"Invalid Input for Length","invalid again", "12", "Invalid Input for Height","8"});
+            var input = new TestInput(new[] {"Invalid Input for Length","invalid again", "12", "Invalid Input for Height","8","q"});
             var generator = new WorldGenerator(output, input);
 
             // Act 

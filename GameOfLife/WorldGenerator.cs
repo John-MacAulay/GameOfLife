@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace GameOfLife
 {
@@ -21,8 +23,9 @@ namespace GameOfLife
             lengthAsInt = GetWorldParameter("length");
             heightAsInt = GetWorldParameter("height");
 
-            var worldToReturn = new World(lengthAsInt, heightAsInt);
-            return worldToReturn;
+            var newlyCreatedWorld = new World(lengthAsInt, heightAsInt);
+            var worldWithLiveCells = ManuallyAddLiveCellPositions(newlyCreatedWorld);
+            return worldWithLiveCells;
         }
 
         private int GetWorldParameter(string prompt)
@@ -37,6 +40,32 @@ namespace GameOfLife
             }
 
             return requiredInt;
+        }
+
+        private World ManuallyAddLiveCellPositions(World world)
+        {
+            var positionsForLiveCells = new List<Position>();
+            var NewPositionString = "";
+            while (NewPositionString != "q")
+            {
+                NewPositionString = AddNewLiveCellPositionFromUserInput(world, positionsForLiveCells);
+            }
+
+            return world;
+        }
+
+        private string AddNewLiveCellPositionFromUserInput(World world, List<Position> positionsForLiveCells)
+        {
+            string response;
+            _display.PromptForLiveCellSeedPosition();
+            response = _input.GetText();
+            var worldPositionValidator = new WorldPositionValidator(world);
+            if (worldPositionValidator.TryParseStringResponseToPosition(response))
+            {
+                positionsForLiveCells.Add(worldPositionValidator.ReturnValidatedPosition);
+            }
+
+            return response;
         }
     }
 }
