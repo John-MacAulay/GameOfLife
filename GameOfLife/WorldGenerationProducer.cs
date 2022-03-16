@@ -12,7 +12,7 @@ namespace GameOfLife
 
         public void MakeNextGeneration()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
