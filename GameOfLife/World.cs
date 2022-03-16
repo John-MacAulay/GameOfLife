@@ -4,6 +4,7 @@ namespace GameOfLife
 {
     public class World
     {
+        public int CurrentGenerationNumber { get; set; } = 0;
         public List<Cell> Cells { get; }
 
         public int Length { get; }

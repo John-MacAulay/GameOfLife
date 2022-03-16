@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
+using System.Linq;
+
 
 namespace GameOfLife
 {
@@ -8,6 +8,7 @@ namespace GameOfLife
     {
         private readonly IInput _input;
         private readonly Display _display;
+        private World World { get; set; }
 
         public WorldGenerator(IOutput output, IInput input)
         {
@@ -17,15 +18,12 @@ namespace GameOfLife
 
         public World GetWorldFromManualInputs()
         {
-            var lengthAsInt = 0;
-            var heightAsInt = 0;
+            var lengthAsInt = GetWorldParameter("length");
+            var heightAsInt = GetWorldParameter("height");
 
-            lengthAsInt = GetWorldParameter("length");
-            heightAsInt = GetWorldParameter("height");
-
-            var newlyCreatedWorld = new World(lengthAsInt, heightAsInt);
-            var worldWithLiveCells = ManuallyAddLiveCellPositions(newlyCreatedWorld);
-            return worldWithLiveCells;
+            World = new World(lengthAsInt, heightAsInt);
+            ManuallyAddLiveCellPositions();
+            return World;
         }
 
         private int GetWorldParameter(string prompt)
@@ -42,30 +40,33 @@ namespace GameOfLife
             return requiredInt;
         }
 
-        private World ManuallyAddLiveCellPositions(World world)
+        private void ManuallyAddLiveCellPositions()
         {
             var positionsForLiveCells = new List<Position>();
-            var NewPositionString = "";
-            while (NewPositionString != "q")
+            var userInputForPosition = "";
+            while (userInputForPosition != "q")
             {
-                NewPositionString = AddNewLiveCellPositionFromUserInput(world, positionsForLiveCells);
+                userInputForPosition = AddNewLiveCellPositionFromUserInput(World, positionsForLiveCells);
             }
 
-            return world;
+            foreach (var cellToMakeLive in positionsForLiveCells.Select(position => World.Cells.First(cell => cell.Position == position)))
+            {
+                cellToMakeLive.IsAlive = true;
+            }
+            
         }
 
         private string AddNewLiveCellPositionFromUserInput(World world, List<Position> positionsForLiveCells)
         {
-            string response;
             _display.PromptForLiveCellSeedPosition();
-            response = _input.GetText();
+            var userInputForPosition = _input.GetText();
             var worldPositionValidator = new WorldPositionValidator(world);
-            if (worldPositionValidator.TryParseStringToPosition(response))
+            if (worldPositionValidator.TryParseStringToPosition(userInputForPosition))
             {
                 positionsForLiveCells.Add(worldPositionValidator.ValidatedPosition);
             }
 
-            return response;
+            return userInputForPosition;
         }
     }
 }

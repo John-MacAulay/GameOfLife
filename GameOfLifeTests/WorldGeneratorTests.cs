@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Principal;
 using GameOfLife;
 using Xunit;
@@ -60,6 +62,47 @@ namespace GameOfLifeTests
             Assert.Equal(expectedFifthPrompt, prompt5); 
             Assert.Equal(expectedHeightOfCreatedWorld, actualWorld.Height);
             Assert.Equal(expectedLengthOfCreatedWorld, actualWorld.Length);
-        } 
+        }
+
+        public static IEnumerable<object[]> GetInputs()
+        {
+            yield return new object[]
+            {
+                new[]{"9","8", "3,2", "2,2","4,4","q"},
+                72,
+                3
+            };
+            
+            yield return new object[]
+            {
+                new[]{"15","20", "3,2", "12,10" ,"invalid", "2,2","4,4", "13,10", "q"},
+                300,
+                5
+            };
+            
+        }
+
+
+        [Theory]
+        [MemberData(nameof(GetInputs))]
+        public void GivenValidInputsInSequence_GetWorldFromManualInputs_CanReturnAWorldWithDesignatedCellsAsAlive
+            (string[] userInput, int expectedCells, int expectedLiveSeedCells)
+        {
+            // Arrange 
+            var output = new TestOutput();
+            var input = new TestInput(userInput);
+            var generator = new WorldGenerator(output, input);
+            var world = generator.GetWorldFromManualInputs();
+
+            // Act 
+            var numberOfWorldCells = world.Cells.Count;
+            var numberOfLiveSeedCells = world.Cells.Where(cell => cell.IsAlive).ToList().Count; 
+            
+            // Assert
+            Assert.Equal(expectedCells,numberOfWorldCells);
+            Assert.Equal(expectedLiveSeedCells, numberOfLiveSeedCells);
+            
+            
+        }
     }
 }

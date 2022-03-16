@@ -1,11 +1,13 @@
 using System;
+using System.Linq;
+using System.Text;
 
 namespace GameOfLife
 {
     public class Display
     {
         private readonly IOutput _output;
-
+        private readonly string _middleDot = char.ConvertFromUtf32(0x000000B7);
         public Display(IOutput output)
         {
             _output = output;
@@ -23,6 +25,22 @@ namespace GameOfLife
                 $"This should be entered as the row starting from 0, and the column starting from 0, seperated" +
                 $"by a comma.  ie.   2,3  means there is a live cell seed at column 2, row 3. {Environment.NewLine}" +
                 $"If you have finished entering live cells enter 'q' to quit");
+        }
+
+        public void ShowWorld(World world)
+        {
+            var worldAsGrid = new StringBuilder();
+            for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
+            {
+                for (var columnPosition = 0; columnPosition < world.Length; columnPosition++)
+                {
+                    var position = new Position(rowPosition, columnPosition);
+                    var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position); 
+                    worldAsGrid.Append(cellToDefineDisplay.IsAlive ? " *" : $" {_middleDot}");
+                }
+                worldAsGrid.Append($"{Environment.NewLine}"); 
+            }
+            _output.PrintText(worldAsGrid.ToString());
         }
     }
 }
