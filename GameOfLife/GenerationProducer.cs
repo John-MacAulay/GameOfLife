@@ -26,6 +26,24 @@ namespace GameOfLife
 
         private void ApplyRulesForNextGenerationLife()
         {
+            foreach (var cell in World.Cells.Where(cell => cell.NumberOfLiveNeighbours == 3))
+            {
+                cell.IsAlive = true;
+            }
+
+            foreach (var cell in World.Cells.Where(cell => cell.IsAlive))
+            {
+                switch (cell.NumberOfLiveNeighbours)
+                {
+                    case 2:
+                        cell.IsAlive = true;
+                        break;
+                    case < 2:
+                    case > 3:
+                        cell.IsAlive = false;
+                        break;
+                }
+            }
             
         }
 
@@ -77,7 +95,8 @@ namespace GameOfLife
             };
 
             var adjustedPositions = positionsOfNeighbours.Select(AdjustWorldWrapping).ToList();
-            return adjustedPositions.Select(position => World.Cells.First(cell => cell.Position == position)).ToList();
+            return adjustedPositions.Select(position => World.CellAtThisWorldPosition(position)).ToList();
+            
         }
 
         private Position AdjustWorldWrapping(Position potentialNewPosition)
