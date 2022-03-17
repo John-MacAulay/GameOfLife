@@ -11,13 +11,13 @@ namespace GameOfLifeTests
         {
             // Arrange 
             var world = new World(10, 15);
-            
+
             // Actual
             var actual = world.Cells.Count;
-            
+
             // Assert
             const int expected = 150;
-            Assert.Equal(expected,actual);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -29,13 +29,10 @@ namespace GameOfLifeTests
 
             // Act
             var actualUniquePositions = cellPositions.Distinct().Count();
-            
+
             // Expected 
             var expectedUniquePositions = world.Cells.Count;
             Assert.True(expectedUniquePositions == actualUniquePositions);
-
         }
-        
-        
     }
 }

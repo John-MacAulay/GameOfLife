@@ -4,11 +4,12 @@ namespace GameOfLife
 {
     public class Position : IEquatable<Position>
     {
-        public Position( int column, int row)
+        public Position(int column, int row)
         {
             Column = column;
             Row = row;
         }
+
         public int Row { get; set; }
         public int Column { get; set; }
 
@@ -23,8 +24,7 @@ namespace GameOfLife
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Position) obj);
+            return obj.GetType() == this.GetType() && Equals((Position) obj);
         }
 
         public override int GetHashCode()

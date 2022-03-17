@@ -8,6 +8,7 @@ namespace GameOfLife
     {
         private readonly IOutput _output;
         private readonly string _middleDot = char.ConvertFromUtf32(0x000000B7);
+
         public Display(IOutput output)
         {
             _output = output;
@@ -32,18 +33,21 @@ namespace GameOfLife
             _output.ClearDisplay();
             var worldAsGrid = new StringBuilder();
             worldAsGrid.Append($"{Environment.NewLine}");
-            worldAsGrid.Append($" Generation {world.CurrentGenerationNumber} {Environment.NewLine}{Environment.NewLine}");
-            
+            worldAsGrid.Append(
+                $" Generation {world.CurrentGenerationNumber} {Environment.NewLine}{Environment.NewLine}");
+
             for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
             {
                 for (var columnPosition = 0; columnPosition < world.Length; columnPosition++)
                 {
                     var position = new Position(columnPosition, rowPosition);
-                    var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position); 
+                    var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position);
                     worldAsGrid.Append(cellToDefineDisplay.IsAlive ? " *" : $" {_middleDot}");
                 }
-                worldAsGrid.Append($"{Environment.NewLine}"); 
+
+                worldAsGrid.Append($"{Environment.NewLine}");
             }
+
             _output.PrintText(worldAsGrid.ToString());
         }
     }

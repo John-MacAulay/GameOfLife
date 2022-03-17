@@ -171,7 +171,6 @@ namespace GameOfLifeTests
                 {
                     new(5, 2),
                     new(4, 2),
-                    
                 },
                 false
             };
@@ -183,9 +182,8 @@ namespace GameOfLifeTests
                     new(5, 2),
                     new(4, 2),
                     new(0, 2),
-                    new(5,1),
-                    new(4,1)
-                    
+                    new(5, 1),
+                    new(4, 1)
                 },
                 false
             };
@@ -226,29 +224,29 @@ namespace GameOfLifeTests
             var cellToCheck = world.CellAtThisWorldPosition(cellPositionUnderTest);
 
             // Assert
-            Assert.Equal(isAliveAtNextGen,cellToCheck.IsAlive);
+            Assert.Equal(isAliveAtNextGen, cellToCheck.IsAlive);
         }
 
         public static IEnumerable<object[]> GetInputs4()
         {
             yield return new object[]
             {
-                new Position(1,1),
+                new Position(1, 1),
                 new List<Position>()
                 {
-                    new (1,1)
+                    new(1, 1)
                 },
                 false
             };
             yield return new object[]
             {
-                new Position(1,1),
+                new Position(1, 1),
                 new List<Position>()
                 {
-                    new (1,1),
-                    new (1,3),
-                    new (4,3),
-                    new (4,2)
+                    new(1, 1),
+                    new(1, 3),
+                    new(4, 3),
+                    new(4, 2)
                 },
                 false
             };
@@ -278,21 +276,21 @@ namespace GameOfLifeTests
             var cellToCheck = world.CellAtThisWorldPosition(cellPositionUnderTest);
 
             // Assert
-            Assert.Equal(isAliveAtNextGen,cellToCheck.IsAlive);
+            Assert.Equal(isAliveAtNextGen, cellToCheck.IsAlive);
         }
 
         public static IEnumerable<object[]> GetInputs5()
         {
             yield return new object[]
             {
-                new Position(1,1),
+                new Position(1, 1),
                 new List<Position>()
                 {
-                    new (1,1),
-                    new (0,1),
-                    new (column:2,1),
-                    new (1,2),
-                    new (1,0)
+                    new(1, 1),
+                    new(0, 1),
+                    new(column: 2, 1),
+                    new(1, 2),
+                    new(1, 0)
                 },
                 false
             };
@@ -322,7 +320,7 @@ namespace GameOfLifeTests
             var cellToCheck = world.CellAtThisWorldPosition(cellPositionUnderTest);
 
             // Assert
-            Assert.Equal(isAliveAtNextGen,cellToCheck.IsAlive);
+            Assert.Equal(isAliveAtNextGen, cellToCheck.IsAlive);
         }
     }
 }

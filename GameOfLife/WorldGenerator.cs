@@ -49,12 +49,12 @@ namespace GameOfLife
                 userInputForPosition = AddNewLiveCellPositionFromUserInput(World, positionsForLiveCells);
             }
 
-            foreach (var cellToMakeLive in positionsForLiveCells.Select(position => World.CellAtThisWorldPosition(position)))
-                
+            foreach (var cellToMakeLive in positionsForLiveCells.Select(position =>
+                         World.CellAtThisWorldPosition(position)))
+
             {
                 cellToMakeLive.IsAlive = true;
             }
-            
         }
 
         private string AddNewLiveCellPositionFromUserInput(World world, List<Position> positionsForLiveCells)

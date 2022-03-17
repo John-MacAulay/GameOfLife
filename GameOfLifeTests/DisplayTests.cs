@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using GameOfLife;
 using Xunit;
 
@@ -19,15 +18,14 @@ namespace GameOfLifeTests
             var secondCellToMakeLive = world.CellAtThisWorldPosition(new Position(1, 2));
             secondCellToMakeLive.IsAlive = true;
             display.ShowWorld(world);
-            
+
             // Act 
             var actual = testOutput.FakeOutput[1];
-            
+
             // Assert
             var expected = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
                            $" * · ·{Environment.NewLine} · · ·{Environment.NewLine} · * ·{Environment.NewLine}";
             Assert.Equal(expected, actual);
-
         }
     }
 }

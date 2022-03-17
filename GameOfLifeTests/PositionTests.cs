@@ -18,17 +18,15 @@ namespace GameOfLifeTests
         }
 
         [Theory]
-        [InlineData(10,15,11,15)]
+        [InlineData(10, 15, 11, 15)]
         public void GivenTwoPositions_WhenTheyHaveUnequalValuesForColumnOrRow_ThesePositionsAreDefinedAsNotEqual(
             int position1Row, int position1Column, int position2Row, int position2Column)
         {
             // Arrange 
             var position1 = new Position(position1Row, position1Column);
             var position2 = new Position(position2Row, position2Column);
-            
-            Assert.True(position1!=position2);
-            
+
+            Assert.True(position1 != position2);
         }
-        
     }
 }

@@ -21,24 +21,24 @@ namespace GameOfLife
                 return false;
             }
 
-            var potentialColumnOK = int.TryParse(splitString[0], out var potentialColumn);
-            var potentialRowOK = int.TryParse(splitString[1], out var potentialRow);
-            if (!potentialColumnOK || !potentialRowOK)
+            var potentialColumnOk = int.TryParse(splitString[0], out var potentialColumn);
+            var potentialRowOk = int.TryParse(splitString[1], out var potentialRow);
+            if (!potentialColumnOk || !potentialRowOk)
             {
                 return false;
             }
 
-            if (potentialRow < 0 || potentialRow > _world.Height-1)
+            if (potentialRow < 0 || potentialRow > _world.Height - 1)
             {
                 return false;
             }
 
-            if (potentialColumn < 0 || potentialColumn > _world.Length-1)
+            if (potentialColumn < 0 || potentialColumn > _world.Length - 1)
             {
                 return false;
             }
 
-            ValidatedPosition = new Position( potentialColumn, potentialRow);
+            ValidatedPosition = new Position(potentialColumn, potentialRow);
 
             return true;
         }

@@ -6,7 +6,5 @@ namespace GameOfLifeTests
 {
     public class CoreLogicTest
     {
-        
-        
     }
 }

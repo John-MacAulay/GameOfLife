@@ -10,9 +10,6 @@ namespace GameOfLife
             var output = new ConsoleOutput();
             var core = new CoreLogic(output, input);
             core.PlayGame();
-
         }
-
-       
     }
 }

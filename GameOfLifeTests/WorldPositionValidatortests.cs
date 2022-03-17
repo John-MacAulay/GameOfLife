@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using GameOfLife;
 using Xunit;
 
@@ -83,7 +81,9 @@ namespace GameOfLifeTests
 
             // Assert
             Assert.Null(actual);
+            Assert.False(validationIsTrue);
         }
+
         public static IEnumerable<object[]> GetInputs()
         {
             yield return new object[]
@@ -91,11 +91,10 @@ namespace GameOfLifeTests
                 10,
                 15,
                 "3,4",
-                new Position(3,4)
+                new Position(3, 4)
             };
-           
         }
-        
+
         [Theory]
         [MemberData(nameof(GetInputs))]
         public void
@@ -106,14 +105,15 @@ namespace GameOfLifeTests
             var world = new World(worldLength, worldHeight);
             var validator = new WorldPositionValidator(world);
             var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
-            
+
             // Act 
             var actual = validator.ValidatedPosition;
-            
-            // Assert 
-            Assert.Equal(expectedValidatedPosition,actual);
 
+            // Assert 
+            Assert.Equal(expectedValidatedPosition, actual);
+            Assert.True(validationIsTrue);
         }
+
         public static IEnumerable<object[]> GetInputs2()
         {
             yield return new object[]
@@ -122,7 +122,7 @@ namespace GameOfLifeTests
                 15,
                 "3,4",
                 "4,5",
-                new Position(4,5)
+                new Position(4, 5)
             };
             yield return new object[]
             {
@@ -138,15 +138,16 @@ namespace GameOfLifeTests
                 15,
                 "30,12,13",
                 "9,10",
-                new Position(9,10)
+                new Position(9, 10)
             };
         }
-        
+
         [Theory]
         [MemberData(nameof(GetInputs2))]
         public void
             GivenMultipleStringsToCheck_ValidatedPosition_WillReturnLastValidatedPosition_OrNull_DependantOnLastTryParseStringToPosition
-            (int worldLength, int worldHeight, string stringToCheck, string secondCheckedString,Position expectedValidatedPosition)
+            (int worldLength, int worldHeight, string stringToCheck, string secondCheckedString,
+                Position expectedValidatedPosition)
         {
             // Arrange
             var world = new World(worldLength, worldHeight);
@@ -155,11 +156,9 @@ namespace GameOfLifeTests
             var secondValidationIsTrue = validator.TryParseStringToPosition(secondCheckedString);
             // Act 
             var actual = validator.ValidatedPosition;
-            
-            
-            // Assert 
-            Assert.Equal(expectedValidatedPosition,actual);
 
+            // Assert 
+            Assert.Equal(expectedValidatedPosition, actual);
         }
     }
 }

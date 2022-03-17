@@ -1,4 +1,3 @@
-using System.Diagnostics.Tracing;
 using System.Threading;
 
 namespace GameOfLife
@@ -8,7 +7,7 @@ namespace GameOfLife
         private readonly IInput _input;
         private readonly Display _display;
         private readonly IOutput _output;
-            
+
         public CoreLogic(IOutput output, IInput input)
         {
             _input = input;
@@ -26,12 +25,9 @@ namespace GameOfLife
             {
                 generations.MakeNextGeneration();
                 Thread.Sleep(1000);
-                
+
                 _display.ShowWorld(world);
             }
-
         }
-        
-        
     }
 }
