@@ -1,14 +1,10 @@
+using GameOfLife;
+using Microsoft.VisualBasic;
 using Xunit;
 
 namespace GameOfLifeTests
 {
-    public class CoreLogicTests
+    public class CoreLogicTest
     {
-        [Fact]
-        public void GivenCoreLogicPlay_ItWillGetANewWorldAccordingToInputParameters()
-        {
-            
-        }
-        
     }
 }
