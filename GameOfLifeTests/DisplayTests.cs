@@ -24,7 +24,8 @@ namespace GameOfLifeTests
             var actual = testOutput.FakeOutput[1];
             
             // Assert
-            var expected = $"{Environment.NewLine} * · ·{Environment.NewLine} · · ·{Environment.NewLine} · * ·{Environment.NewLine}";
+            var expected = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
+                           $" * · ·{Environment.NewLine} · · ·{Environment.NewLine} · * ·{Environment.NewLine}";
             Assert.Equal(expected, actual);
 
         }

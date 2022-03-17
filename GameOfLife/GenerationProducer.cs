@@ -41,7 +41,6 @@ namespace GameOfLife
                         break;
                 }
             }
-            
         }
 
         private void UpdateAllCellsNumberOfLiveNeighbours()
@@ -91,12 +90,11 @@ namespace GameOfLife
                 new(potentialColumnRight, potentialRowBelow)
             };
 
-            var adjustedPositions = positionsOfNeighbours.Select(AdjustWorldWrapping).ToList();
+            var adjustedPositions = positionsOfNeighbours.Select(AdjustForWorldWrapping).ToList();
             return adjustedPositions.Select(position => World.CellAtThisWorldPosition(position)).ToList();
-            
         }
 
-        private Position AdjustWorldWrapping(Position potentialNewPosition)
+        private Position AdjustForWorldWrapping(Position potentialNewPosition)
         {
             if (potentialNewPosition.Row < 0) potentialNewPosition.Row = World.Height - 1;
 

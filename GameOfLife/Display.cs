@@ -31,7 +31,8 @@ namespace GameOfLife
         {
             _output.ClearDisplay();
             var worldAsGrid = new StringBuilder();
-            worldAsGrid.Append($"{Environment.NewLine}"); 
+            worldAsGrid.Append($"{Environment.NewLine}");
+            worldAsGrid.Append($" Generation {world.CurrentGenerationNumber} {Environment.NewLine}{Environment.NewLine}");
             
             for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
             {
