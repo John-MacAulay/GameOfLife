@@ -4,7 +4,7 @@ using Xunit;
 
 namespace GameOfLifeTests
 {
-    public class CoreLogicTests
+    public class CoreLogicTest
     {
         
         

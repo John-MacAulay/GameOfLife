@@ -20,7 +20,7 @@ namespace GameOfLife
             {
                 for (var columnPosition = 0; columnPosition <Length; columnPosition++)
                 {
-                    var cellToAdd = new Cell(new Position(rowPosition, columnPosition));
+                    var cellToAdd = new Cell(new Position( columnPosition, rowPosition));
                     Cells.Add(cellToAdd);
                 }
             }

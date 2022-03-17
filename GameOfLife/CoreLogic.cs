@@ -20,7 +20,7 @@ namespace GameOfLife
             var worldGenerator = new WorldGenerator(_output, _input);
             var world = worldGenerator.GetWorldFromManualInputs();
             _display.ShowWorld(world);
-            var generations = new WorldGenerationProducer(world);
+            var generations = new GenerationProducer(world);
             while (!world.IsEmpty())
             {
                 generations.MakeNextGeneration();
