@@ -18,10 +18,7 @@ namespace GameOfLife
             ResetCurrentLiveNeighboursOfAllCellsToZero();
             UpdateAllCellsNumberOfLiveNeighbours();
             ApplyRulesForNextGenerationLife();
-            // foreach cell in World.cells if numberOfLiveNeighbours == 3 Cell.IsAlive = true
-            // foreach cell in World.cell that is alive if  if numberOfLiveNeighbours <2 cell.Alive = false
-            // foreach cell in World.cell that is alive if  if numberOfLiveNeighbours == 2 cell.Alive = true
-            // foreach cell that is alive if numberOfLiveNeighbours >3 cell.Alive  false
+            World.CurrentGenerationNumber++;
         }
 
         private void ApplyRulesForNextGenerationLife()

@@ -22,19 +22,22 @@ namespace GameOfLife
         {
             _output.PrintText(
                 $"Please enter the next position of a live cell within the bounds of your Game of Life grid. " +
-                $"This should be entered as the row starting from 0, and the column starting from 0, seperated" +
+                $"This should be entered as the row starting from 0, and the column starting from 0, seperated {Environment.NewLine}" +
                 $"by a comma.  ie.   2,3  means there is a live cell seed at column 2, row 3. {Environment.NewLine}" +
                 $"If you have finished entering live cells enter 'q' to quit");
         }
 
         public void ShowWorld(World world)
         {
+            _output.ClearDisplay();
             var worldAsGrid = new StringBuilder();
+            worldAsGrid.Append($"{Environment.NewLine}"); 
+            
             for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
             {
                 for (var columnPosition = 0; columnPosition < world.Length; columnPosition++)
                 {
-                    var position = new Position(rowPosition, columnPosition);
+                    var position = new Position(columnPosition, rowPosition);
                     var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position); 
                     worldAsGrid.Append(cellToDefineDisplay.IsAlive ? " *" : $" {_middleDot}");
                 }

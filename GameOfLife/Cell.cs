@@ -13,14 +13,6 @@ namespace GameOfLife
             Position = position;
         }
 
-        private void DefineNeighbourCells(World world)
-        {
-            // list of neighbour cells should be eight
-            // defined by position row -1 ( column -1, colum = , column +1) 
-            // defined by position row =  ( column -1 , column +1)
-            // defined by position row + 1 ( column -1, colum = , column +1)
-            // then check for wrapping 
-            
-        }
+
     }
 }

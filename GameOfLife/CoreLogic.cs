@@ -1,4 +1,5 @@
 using System.Diagnostics.Tracing;
+using System.Threading;
 
 namespace GameOfLife
 {
@@ -24,6 +25,9 @@ namespace GameOfLife
             while (!world.IsEmpty())
             {
                 generations.MakeNextGeneration();
+                Thread.Sleep(1000);
+                
+                _display.ShowWorld(world);
             }
 
         }

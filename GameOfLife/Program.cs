@@ -6,7 +6,10 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var input = new ConsoleInput();
+            var output = new ConsoleOutput();
+            var core = new CoreLogic(output, input);
+            core.PlayGame();
 
         }
 

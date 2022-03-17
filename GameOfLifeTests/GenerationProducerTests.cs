@@ -280,6 +280,49 @@ namespace GameOfLifeTests
             // Assert
             Assert.Equal(isAliveAtNextGen,cellToCheck.IsAlive);
         }
-        
+
+        public static IEnumerable<object[]> GetInputs5()
+        {
+            yield return new object[]
+            {
+                new Position(1,1),
+                new List<Position>()
+                {
+                    new (1,1),
+                    new (0,1),
+                    new (column:2,1),
+                    new (1,2),
+                    new (1,0)
+                },
+                false
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(GetInputs5))]
+        public void
+            NextGeneration_MakesAnyCellHasMoreThanThreeNeighbours_DeadInNextGeneration
+            (Position cellPositionUnderTest, List<Position> positionsAliveAtStartGeneration, bool isAliveAtNextGen)
+        {
+            // Arrange 
+            var world = new World(6, 5);
+
+            var cellToMakeLive =
+                positionsAliveAtStartGeneration.Select(position => world.CellAtThisWorldPosition(position))
+                    .ToList();
+            foreach (var cell in cellToMakeLive)
+            {
+                cell.IsAlive = true;
+            }
+
+            var nextGen = new GenerationProducer(world);
+            nextGen.MakeNextGeneration();
+
+            // Act 
+            var cellToCheck = world.CellAtThisWorldPosition(cellPositionUnderTest);
+
+            // Assert
+            Assert.Equal(isAliveAtNextGen,cellToCheck.IsAlive);
+        }
     }
 }

@@ -21,10 +21,10 @@ namespace GameOfLifeTests
             display.ShowWorld(world);
             
             // Act 
-            var actual = testOutput.FakeOutput[0];
+            var actual = testOutput.FakeOutput[1];
             
             // Assert
-            var expected = $" * · ·{Environment.NewLine} · · *{Environment.NewLine} · · ·{Environment.NewLine}";
+            var expected = $"{Environment.NewLine} * · ·{Environment.NewLine} · · ·{Environment.NewLine} · * ·{Environment.NewLine}";
             Assert.Equal(expected, actual);
 
         }
