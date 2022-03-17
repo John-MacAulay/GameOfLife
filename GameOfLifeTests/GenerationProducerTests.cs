@@ -40,11 +40,26 @@ namespace GameOfLifeTests
                     new(1, 1)
                 }
             };
+            yield return new object[]
+            {
+                new Position(4, 7),
+                new List<Position>
+                {
+                    new(3, 6),
+                    new(4, 6),
+                    new(0, 6),
+                    new(3, 7),
+                    new(0, 7),
+                    new(3, 0),
+                    new(4, 0),
+                    new(0, 0)
+                }
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetInputs))]
-        public void GivenACellReturnNeighbours_GetsAListOfEightClosestNeighboursIn2DWrappedWorld
+        public void GivenACell_ReturnNeighbours_GetsAListOfEightClosestNeighboursToThatCellIn2DWrappedWorld
             (Position initialCellPosition, List<Position> manualNeighbourPositions)
         {
             // Arrange
@@ -61,6 +76,35 @@ namespace GameOfLifeTests
                     .ToList();
 
             Assert.Equal(expected, actualNeighbourCellsList);
+        }
+
+        [Fact]
+        public void
+            MakeNextGeneration_WillMakeACellAliveForNewGeneration_WhenItHasExactlyThreeNeighbours_RegardlessOfPreviousStatus()
+        {
+            // Arrange 
+            var world = new World(5, 5);
+            var positionsOfCellsThatAreAlive = new List<Position>()
+            {
+                new Position(1,1), 
+                new Position(1,2),
+                new Position(2,1)
+            };
+            var cellToMakeLive =
+                positionsOfCellsThatAreAlive.Select(position => world.Cells.First(cell => cell.Position == position)).ToList();
+            foreach (var cell in cellToMakeLive)
+            {
+                cell.IsAlive = true;
+            }
+            var nextGen = new GenerationProducer(world);
+            nextGen.MakeNextGeneration();
+            
+            // Act 
+            var cellToCheck = world.Cells.First(cell => cell.Position == new Position(2, 2));
+            
+            // Assert
+            Assert.True(cellToCheck.IsAlive);
+
         }
     }
 }
