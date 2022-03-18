@@ -7,6 +7,7 @@ namespace GameOfLife
         private readonly IInput _input;
         private readonly Display _display;
         private readonly IOutput _output;
+        private  World _world;
 
         public CoreLogic(IOutput output, IInput input)
         {
@@ -15,18 +16,34 @@ namespace GameOfLife
             _display = new Display(_output);
         }
 
-        public void PlayGame()
+        public void StartLogic()
         {
             var worldGenerator = new WorldGenerator(_output, _input);
-            var world = worldGenerator.GetWorldFromManualInputs();
-            _display.ShowWorld(world);
-            var generations = new GenerationProducer(world);
-            while (!world.IsEmpty())
+            _display.OfferChoiceForGeneratingWorld();
+            var load = _input.GetText().ToLower();
+            if (load != "l")
+            {
+                _world = worldGenerator.GetWorldFromManualInputs();
+                
+            }
+            else
+            {
+                var reader = new WorldFileReader();
+                _world =  reader.LoadJsonLocal("OfficialWorldSave");
+                
+            }
+
+            PlayGame();
+        }
+        public void PlayGame()
+        {
+            _display.ShowWorld(_world);
+            var generations = new GenerationProducer(_world);
+            while (!_world.IsEmpty())
             {
                 generations.MakeNextGeneration();
                 Thread.Sleep(1000);
-
-                _display.ShowWorld(world);
+                _display.ShowWorld(_world);
             }
         }
     }

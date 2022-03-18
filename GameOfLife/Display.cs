@@ -50,5 +50,12 @@ namespace GameOfLife
 
             _output.PrintText(worldAsGrid.ToString());
         }
+
+        public void OfferChoiceForGeneratingWorld()
+        {
+            _output.ClearDisplay();
+            _output.PrintText("Please enter 'l' to load a file from disc," +
+                              " all other answers will default to manual generation of world");
+        }
     }
 }
