@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 
 namespace GameOfLife
@@ -16,18 +17,28 @@ namespace GameOfLife
             _display = new Display(_output);
         }
 
-        public void StartLogic()
+        public void WorldSourceOptions()
         {
-            var worldGenerator = new WorldGenerator(_output, _input);
             _display.OfferChoiceForGeneratingWorld();
             var load = _input.GetText().ToLower();
             if (load != "l")
             {
+                var worldGenerator = new WorldGenerator(_output, _input);
                 _world = worldGenerator.GetWorldFromManualInputs();
                 
             }
             else
             {
+                var fileNamesToDisplay = new List<string>();
+                string [] savedGameFiles  = System.IO.Directory.GetFiles($@"..//..//..//..//./SavedWorlds", "*.json");
+                foreach (var fileName in savedGameFiles)
+                {
+                   var fileNameShortened = fileName.Substring(30);
+                   var stringLength = fileNameShortened.Length;
+                   var finalName = fileNameShortened.Remove(stringLength - 5);
+                   fileNamesToDisplay.Add(finalName); 
+                }
+                
                 var reader = new WorldFileReader();
                 _world =  reader.LoadJsonLocal("OfficialWorldSave");
                 

@@ -57,5 +57,16 @@ namespace GameOfLife
             _output.PrintText("Please enter 'l' to load a file from disc," +
                               " all other answers will default to manual generation of world");
         }
+
+        public void PromptForCheckIfSaveWorld()
+        {
+            _output.PrintText($"{Environment.NewLine} Would you like to save this world set up? {Environment.NewLine}" +
+                              $" (y or yes to save, any other key for no.) ");
+        }
+
+        public void PromptForSaveName()
+        {
+            _output.PrintText($"{Environment.NewLine} Please enter the file name you would like this world saved under.");
+        }
     }
 }

@@ -9,12 +9,27 @@ namespace GameOfLifeTests
         public void GivenAValidWorld_SaveJsonLocal_WillSaveJsonFileToLocalFolder()
         {
             // Arrange 
-            var world = new World(20,25);
-            var testAliveLocation = world.CellAtThisWorldPosition(new Position(12, 17));
+            var world = new World(7,8);
+            var testAliveLocation = world.CellAtThisWorldPosition(new Position(0, 0));
+            var testAliveLocation2 = world.CellAtThisWorldPosition(new Position(1, 0));
+            var testAliveLocation3 = world.CellAtThisWorldPosition(new Position(2, 0));
+            var testAliveLocation4 = world.CellAtThisWorldPosition(new Position(0, 1));
+            var testAliveLocation5 = world.CellAtThisWorldPosition(new Position(4, 0));
+            var testAliveLocation6 = world.CellAtThisWorldPosition(new Position(2, 3));
+    
             testAliveLocation.IsAlive = true;
-            var worldFileSave = new WorldFileSaver(world);
+            testAliveLocation2.IsAlive = true;
+            testAliveLocation2.IsAlive = true; 
+            testAliveLocation3.IsAlive = true;
+            testAliveLocation4.IsAlive = true;
+            testAliveLocation5.IsAlive = true;
+            testAliveLocation5.IsAlive = true;
             
-            worldFileSave.SaveJsonLocal("OfficialWorldSave");
+            
+            
+            var worldFileSave = new WorldFileSaver(world,$@"..//..//..//..//./SavedWorlds/");
+            
+            worldFileSave.SaveJsonLocal("OfficialWorldSaveNew");
 
             var reader = new WorldFileReader();
             var returnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
