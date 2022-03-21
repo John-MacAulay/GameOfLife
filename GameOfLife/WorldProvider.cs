@@ -27,6 +27,7 @@ namespace GameOfLife
             if (load != "l")
             {
                 ChooseWorldFromManualInputs();
+                CheckAndSaveWorldIfRequired();
             }
             else
             {
@@ -49,6 +50,16 @@ namespace GameOfLife
             saveGameNumber = LetUserChooseSavedFileToLoad(saveGameNumber, fileNamesToDisplay);
             var reader = new WorldFileReader(_pathToSavedGamesFolder);
             _world = reader.LoadJsonLocal(fileNamesToDisplay[saveGameNumber - 1]);
+        }
+        private void CheckAndSaveWorldIfRequired()
+        {
+            _display.PromptForCheckIfSaveWorld();
+            var response = _input.GetText().ToLower();
+            if (response is not ("y" or "yes")) return;
+            _display.PromptForSaveName();
+            var nameToSaveUnder = _input.GetText();
+            var saver = new WorldFileSaver(_world, _pathToSavedGamesFolder);
+            saver.SaveJsonLocal(nameToSaveUnder);
         }
 
         private List<string> RetrieveFileNamesToDisplay()

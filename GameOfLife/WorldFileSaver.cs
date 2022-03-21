@@ -17,7 +17,7 @@ namespace GameOfLife
         public void SaveJsonLocal(string fileName)
         {
             var jsonString = JsonSerializer.Serialize(_world);
-            var fileToWrite = new StreamWriter($@"{_relativePathToSaveFolderToSaves}{fileName}.json");
+            var fileToWrite = new StreamWriter($@"{_relativePathToSaveFolderToSaves}/{fileName}.json");
             fileToWrite.WriteLine(jsonString);
             fileToWrite.Close();
         }

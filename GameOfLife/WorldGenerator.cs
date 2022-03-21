@@ -23,7 +23,7 @@ namespace GameOfLife
 
             World = new World(lengthAsInt, heightAsInt);
             ManuallyAddLiveCellPositions();
-            CheckAndSaveWorldIfRequired();
+            // CheckAndSaveWorldIfRequired();
             return World;
         }
 
