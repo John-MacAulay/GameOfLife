@@ -6,18 +6,19 @@ namespace GameOfLife
 {
     public class WorldFileReader
     {
-      
-        
-        public WorldFileReader()
+        private readonly string _relativePathToSaveFolder;
+
+        public WorldFileReader(string relativePathToSaveFolder)
         {
-            
+            _relativePathToSaveFolder = relativePathToSaveFolder;
         }
 
         public World LoadJsonLocal(string fileName)
         {
             var sb = new StringBuilder();
-            var path = $"..//..//..//..//./SavedWorlds/{fileName}.json";
-            using (var reader = new StreamReader($@"{path}")) 
+            var path = $"{_relativePathToSaveFolder}/{fileName}.json";
+
+            using (var reader = new StreamReader($@"{path}"))
             {
                 while (!reader.EndOfStream)
                 {
@@ -27,10 +28,8 @@ namespace GameOfLife
             }
 
             var jsonString = sb.ToString();
-            var  world  = JsonSerializer.Deserialize<World>(jsonString);
-            // var world = JsonSerializer.Deserialize(jsonString);
+            var world = JsonSerializer.Deserialize<World>(jsonString);
             return world;
         }
-
     }
 }

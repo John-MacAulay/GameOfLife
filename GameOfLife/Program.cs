@@ -8,8 +8,8 @@ namespace GameOfLife
         {
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
-            var core = new CoreLogic(output, input);
-            core.WorldSourceOptions();
+            var core = new CoreLogic(output, input, 1000, @"..//..//..//..//./SavedWorlds");
+            core.PlayGame();
         }
     }
 }

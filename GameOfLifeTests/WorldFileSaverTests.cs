@@ -27,11 +27,11 @@ namespace GameOfLifeTests
             
             
             
-            var worldFileSave = new WorldFileSaver(world,$@"..//..//..//..//./SavedWorlds/");
+            var worldFileSave = new WorldFileSaver(world,$@"..//..//..//..//./TestSavedWorlds/");
             
-            worldFileSave.SaveJsonLocal("OfficialWorldSaveNew");
+            worldFileSave.SaveJsonLocal("OfficialWorldSave");
 
-            var reader = new WorldFileReader();
+            var reader = new WorldFileReader(@"..//..//..//..//./TestSavedWorlds");
             var returnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
             
             Assert.NotNull(returnedWorld);

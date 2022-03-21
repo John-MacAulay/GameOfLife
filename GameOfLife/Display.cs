@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -67,6 +68,23 @@ namespace GameOfLife
         public void PromptForSaveName()
         {
             _output.PrintText($"{Environment.NewLine} Please enter the file name you would like this world saved under.");
+        }
+
+        public void ShowSavedGameFiles(List<string> fileNamesToDisplay)
+        {
+            var numberSavedFiles = 0;
+            _output.PrintText($" Game Saved Files available to load: {Environment.NewLine}");
+            foreach (var file in fileNamesToDisplay)
+            {
+                numberSavedFiles++;
+                _output.PrintText($" {numberSavedFiles}. {file}");
+            }
+            
+        }
+
+        public void PromptForSaveToLoad()
+        {
+            _output.PrintText($" Please enter the number of the saved game file you wish to load.");
         }
     }
 }

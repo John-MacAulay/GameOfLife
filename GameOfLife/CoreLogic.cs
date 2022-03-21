@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace GameOfLife
@@ -8,52 +9,30 @@ namespace GameOfLife
         private readonly IInput _input;
         private readonly Display _display;
         private readonly IOutput _output;
-        private  World _world;
+        private readonly int _displayMillisecondSleep;
+        private readonly string _pathToSavedGamesFolder;
+        private World _world;
 
-        public CoreLogic(IOutput output, IInput input)
+
+        public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep, string pathToSavedGamesFolder)
         {
             _input = input;
             _output = output;
             _display = new Display(_output);
+            _displayMillisecondSleep = displayMillisecondSleep;
+            _pathToSavedGamesFolder = pathToSavedGamesFolder;
         }
 
-        public void WorldSourceOptions()
-        {
-            _display.OfferChoiceForGeneratingWorld();
-            var load = _input.GetText().ToLower();
-            if (load != "l")
-            {
-                var worldGenerator = new WorldGenerator(_output, _input);
-                _world = worldGenerator.GetWorldFromManualInputs();
-                
-            }
-            else
-            {
-                var fileNamesToDisplay = new List<string>();
-                string [] savedGameFiles  = System.IO.Directory.GetFiles($@"..//..//..//..//./SavedWorlds", "*.json");
-                foreach (var fileName in savedGameFiles)
-                {
-                   var fileNameShortened = fileName.Substring(30);
-                   var stringLength = fileNameShortened.Length;
-                   var finalName = fileNameShortened.Remove(stringLength - 5);
-                   fileNamesToDisplay.Add(finalName); 
-                }
-                
-                var reader = new WorldFileReader();
-                _world =  reader.LoadJsonLocal("OfficialWorldSave");
-                
-            }
-
-            PlayGame();
-        }
         public void PlayGame()
         {
+            var worldProvider = new WorldProvider(_output, _input, _pathToSavedGamesFolder);
+            _world = worldProvider.RetrieveWorld();
             _display.ShowWorld(_world);
             var generations = new GenerationProducer(_world);
             while (!_world.IsEmpty())
             {
                 generations.MakeNextGeneration();
-                Thread.Sleep(1000);
+                Thread.Sleep(_displayMillisecondSleep);
                 _display.ShowWorld(_world);
             }
         }
