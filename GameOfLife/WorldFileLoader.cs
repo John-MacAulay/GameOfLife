@@ -4,11 +4,11 @@ using System.Text.Json;
 
 namespace GameOfLife
 {
-    public class WorldFileReader
+    public class WorldFileLoader
     {
         private readonly string _relativePathToSaveFolder;
 
-        public WorldFileReader(string relativePathToSaveFolder)
+        public WorldFileLoader(string relativePathToSaveFolder)
         {
             _relativePathToSaveFolder = relativePathToSaveFolder;
         }

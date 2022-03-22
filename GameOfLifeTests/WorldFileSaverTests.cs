@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using GameOfLife;
 using Xunit;
 
@@ -5,36 +7,50 @@ namespace GameOfLifeTests
 {
     public class WorldFileSaverTests
     {
+        private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+
+
         [Fact]
-        public void GivenAValidWorld_SaveJsonLocal_WillSaveJsonFileToLocalFolder()
+        public void GivenAValidWorld_SaveJsonLocal_WillSaveThisWoldFileInJsonFormatToLocalFolder()
         {
             // Arrange 
-            var world = new World(7,8);
-            var testAliveLocation = world.CellAtThisWorldPosition(new Position(0, 0));
-            var testAliveLocation2 = world.CellAtThisWorldPosition(new Position(1, 0));
-            var testAliveLocation3 = world.CellAtThisWorldPosition(new Position(2, 0));
-            var testAliveLocation4 = world.CellAtThisWorldPosition(new Position(0, 1));
-            var testAliveLocation5 = world.CellAtThisWorldPosition(new Position(4, 0));
-            var testAliveLocation6 = world.CellAtThisWorldPosition(new Position(2, 3));
-    
-            testAliveLocation.IsAlive = true;
-            testAliveLocation2.IsAlive = true;
-            testAliveLocation2.IsAlive = true; 
-            testAliveLocation3.IsAlive = true;
-            testAliveLocation4.IsAlive = true;
-            testAliveLocation5.IsAlive = true;
-            testAliveLocation5.IsAlive = true;
+            var filePathToCheck = _testFolder + "/TinyWorld.json";
+            if (File.Exists(filePathToCheck))
+            {
+                File.Delete(filePathToCheck);
+            }
+            Assert.False(File.Exists(filePathToCheck));
             
+            var world = new World(2, 2);
+            var cellsToBeAlive = new List<Cell>()
+            {
+                world.CellAtThisWorldPosition(new Position(1, 1)),
+                world.CellAtThisWorldPosition(new Position(0, 1)),
+            };
+            foreach (var cell in cellsToBeAlive)
+            {
+                cell.IsAlive = true;
+            }
             
-            
-            var worldFileSave = new WorldFileSaver(world,$@"..//..//..//..//./TestSavedWorlds/");
-            
-            worldFileSave.SaveJsonLocal("OfficialWorldSave");
+            var worldFileSave = new WorldFileSaver(world, _testFolder);
+            worldFileSave.SaveJsonLocal("TinyWorld");
 
-            var reader = new WorldFileReader(@"..//..//..//..//./TestSavedWorlds");
-            var returnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
-            
-            Assert.NotNull(returnedWorld);
+            // Act
+            string actual;
+            using (var sr = new StreamReader(filePathToCheck))
+            {
+                actual = sr.ReadToEnd();
+            }
+
+            const string expected = "{\"CurrentGenerationNumber\":0,\"Cells\":[{\"NumberOfLiveNeighbours\":0," +
+                                    "\"IsAlive\":false,\"Position\":{\"Row\":0,\"Column\":0}}," +
+                                    "{\"NumberOfLiveNeighbours\":0,\"IsAlive\":false,\"Position\":" +
+                                    "{\"Row\":0,\"Column\":1}},{\"NumberOfLiveNeighbours\":0,\"IsAlive\":true," +
+                                    "\"Position\":{\"Row\":1,\"Column\":0}},{\"NumberOfLiveNeighbours\":0," +
+                                    "\"IsAlive\":true,\"Position\":{\"Row\":1,\"Column\":1}}]," +
+                                    "\"Length\":2,\"Height\":2}\n";
+            Assert.True(File.Exists(filePathToCheck));
+            Assert.Equal(expected, actual);
         }
     }
 }
