@@ -24,8 +24,25 @@ namespace GameOfLifeTests
             // Assert
             Assert.True(actualBool);
         }
-
         [Theory]
+        [InlineData(20, 15, "invalid,5")]
+        [InlineData(20, 15, "a,invalid")]
+        public void    TryParseStringToPosition_WhenGivenIntParsableString_WithInvalidValues_WillReturnFalse(
+            int worldLength, int worldHeight, string stringToCheck)
+        {
+            // Assert
+            var world = new World(worldLength, worldHeight);
+            var validator = new WorldPositionValidator(world);
+
+            // Act
+            var actualBool = validator.TryParseStringToPosition(stringToCheck);
+
+            // Assert
+            Assert.False(actualBool);
+        }
+        
+        [Theory]
+        [InlineData(20, 15, "a,5")]
         [InlineData(20, 15, "-1,5")]
         [InlineData(8, 10, "0,-1")]
         [InlineData(15, 10, "15,0")]

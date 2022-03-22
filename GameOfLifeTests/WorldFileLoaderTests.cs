@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GameOfLife;
 using Xunit;
 
@@ -35,14 +36,31 @@ namespace GameOfLifeTests
             // Act
             var actualReturnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
             var actualTypeOfObject = actualReturnedWorld.GetType();
-            var actualCellCount = actualReturnedWorld.Cells.Count; 
-            
+            var actualCellCount = actualReturnedWorld.Cells.Count;
+            var actualLivePositions = actualReturnedWorld.Cells.Where(cell => cell.IsAlive).ToList().Select(cell => cell.Position).ToList();
+
             // Arrange
             const int expectedNumberOfCells = 60;
+            var expectedLivePositions = new List<Position>()
+            {
+                new (0, 0),
+                new (1, 0),
+                new (2, 0),
+                new (0, 1),
+                new (4, 0)
+
+            };
+            foreach (var expectedLivePosition in expectedLivePositions)
+            {
+                Assert.Contains(actualLivePositions, actualPosition => actualPosition == expectedLivePosition);
+            }
+            
             var expectedType =world.GetType();
             Assert.NotNull(actualReturnedWorld);
             Assert.Equal(expectedType,actualTypeOfObject);
             Assert.Equal(expectedNumberOfCells, actualCellCount);
+            Assert.Equal(expectedLivePositions[0], actualLivePositions[0]);
+            
             
            
       
