@@ -22,7 +22,8 @@ namespace GameOfLife
             var heightAsInt = GetWorldParameter("height");
 
             World = new World(lengthAsInt, heightAsInt);
-            ManuallyAddLiveCellPositions();
+            ManuallyAddLiveCellPositions(); 
+            //CheckAndSaveWorldIfRequired();
             return World;
         }
 

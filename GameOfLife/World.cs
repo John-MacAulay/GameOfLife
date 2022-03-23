@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace GameOfLife
 {
@@ -25,6 +26,15 @@ namespace GameOfLife
                     Cells.Add(cellToAdd);
                 }
             }
+        }
+        
+        [JsonConstructor]
+        public World(int length, int height, List<Cell> cells, int currentGenerationNumber)
+        {
+            Height = height;
+            Length = length;
+            Cells = cells;
+            CurrentGenerationNumber = currentGenerationNumber;
         }
 
         public bool IsEmpty()

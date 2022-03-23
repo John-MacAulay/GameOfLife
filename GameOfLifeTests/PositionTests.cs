@@ -28,5 +28,6 @@ namespace GameOfLifeTests
 
             Assert.True(position1 != position2);
         }
+        
     }
 }

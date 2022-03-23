@@ -13,11 +13,12 @@ namespace GameOfLifeTests
             var testOutput = new TestOutput();
             var display = new Display(testOutput);
             var world = new World(3, 3);
+            const int displaySleep = 0;
             var firstCellToMakeLive = world.CellAtThisWorldPosition(new Position(0, 0));
             firstCellToMakeLive.IsAlive = true;
             var secondCellToMakeLive = world.CellAtThisWorldPosition(new Position(1, 2));
             secondCellToMakeLive.IsAlive = true;
-            display.ShowWorld(world);
+            display.ShowWorld(world, displaySleep);
 
             // Act 
             var actual = testOutput.FakeOutput[1];

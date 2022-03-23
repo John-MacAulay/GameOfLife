@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace GameOfLife
 {
@@ -28,7 +30,7 @@ namespace GameOfLife
                 $"If you have finished entering live cells enter 'q' to quit");
         }
 
-        public void ShowWorld(World world)
+        public void ShowWorld(World world, int millisecondsSleep)
         {
             _output.ClearDisplay();
             var worldAsGrid = new StringBuilder();
@@ -49,6 +51,42 @@ namespace GameOfLife
             }
 
             _output.PrintText(worldAsGrid.ToString());
+            Thread.Sleep(millisecondsSleep);
+        }
+
+        public void OfferChoiceForGeneratingWorld()
+        {
+            _output.ClearDisplay();
+            _output.PrintText("Please enter 'l' to load a file from disc," +
+                              " all other answers will default to manual generation of world");
+        }
+
+        public void PromptForCheckIfSaveWorld()
+        {
+            _output.PrintText($"{Environment.NewLine} Would you like to save this world set up? {Environment.NewLine}" +
+                              $" (y or yes to save, any other key for no.) ");
+        }
+
+        public void PromptForSaveName()
+        {
+            _output.PrintText($"{Environment.NewLine} Please enter the file name you would like this world saved under.");
+        }
+
+        public void ShowSavedGameFiles(List<string> fileNamesToDisplay)
+        {
+            var numberSavedFiles = 0;
+            _output.PrintText($" Game Saved Files available to load: {Environment.NewLine}");
+            foreach (var file in fileNamesToDisplay)
+            {
+                numberSavedFiles++;
+                _output.PrintText($" {numberSavedFiles}. {file}");
+            }
+            
+        }
+
+        public void PromptForSaveToLoad()
+        {
+            _output.PrintText($" Please enter the number of the saved game file you wish to load.");
         }
     }
 }

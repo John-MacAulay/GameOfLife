@@ -34,5 +34,14 @@ namespace GameOfLifeTests
             var expectedUniquePositions = world.Cells.Count;
             Assert.True(expectedUniquePositions == actualUniquePositions);
         }
+
+        [Fact]
+        public void GivenAWorldWithNoCellsThatAreAlive_IsEmpty_ReturnsTrue()
+        {
+            // Arrange 
+            var world = new World(10, 15);
+
+            var actual = world.IsEmpty();
+        }
     }
 }

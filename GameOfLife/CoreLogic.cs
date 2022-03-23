@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace GameOfLife
@@ -7,26 +9,30 @@ namespace GameOfLife
         private readonly IInput _input;
         private readonly Display _display;
         private readonly IOutput _output;
+        private readonly int _displayMillisecondSleep;
+        private readonly string _pathToSavedGamesFolder;
+        private World _world;
 
-        public CoreLogic(IOutput output, IInput input)
+
+        public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep, string pathToSavedGamesFolder)
         {
             _input = input;
             _output = output;
             _display = new Display(_output);
+            _displayMillisecondSleep = displayMillisecondSleep;
+            _pathToSavedGamesFolder = pathToSavedGamesFolder;
         }
 
         public void PlayGame()
         {
-            var worldGenerator = new WorldGenerator(_output, _input);
-            var world = worldGenerator.GetWorldFromManualInputs();
-            _display.ShowWorld(world);
-            var generations = new GenerationProducer(world);
-            while (!world.IsEmpty())
+            var worldProvider = new WorldProvider(_output, _input, _pathToSavedGamesFolder);
+            _world = worldProvider.RetrieveWorld();
+            _display.ShowWorld(_world, _displayMillisecondSleep);
+            var generations = new GenerationProducer(_world);
+            while (!_world.IsEmpty())
             {
                 generations.MakeNextGeneration();
-                Thread.Sleep(1000);
-
-                _display.ShowWorld(world);
+                _display.ShowWorld(_world, _displayMillisecondSleep);
             }
         }
     }
