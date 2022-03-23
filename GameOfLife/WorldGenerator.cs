@@ -57,7 +57,7 @@ namespace GameOfLife
                          World.CellAtThisWorldPosition(position)))
 
             {
-                cellToMakeLive.IsAlive = true;
+                cellToMakeLive.MakeCellAlive();
             }
         }
 

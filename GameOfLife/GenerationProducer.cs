@@ -5,7 +5,7 @@ namespace GameOfLife
 {
     public class GenerationProducer
     {
-        private World World { get; set; }
+        private World World { get;  }
 
         public GenerationProducer(World world)
         {
@@ -17,14 +17,14 @@ namespace GameOfLife
             ResetCurrentLiveNeighboursOfAllCellsToZero();
             UpdateAllCellsNumberOfLiveNeighbours();
             ApplyRulesForNextGenerationLife();
-            World.CurrentGenerationNumber++;
+            World.IncrementGenerationNumber();
         }
 
         private void ApplyRulesForNextGenerationLife()
         {
             foreach (var cell in World.Cells.Where(cell => cell.NumberOfLiveNeighbours == 3))
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             foreach (var cell in World.Cells.Where(cell => cell.IsAlive))
@@ -32,11 +32,11 @@ namespace GameOfLife
                 switch (cell.NumberOfLiveNeighbours)
                 {
                     case 2:
-                        cell.IsAlive = true;
+                        cell.MakeCellAlive();
                         break;
                     case < 2:
                     case > 3:
-                        cell.IsAlive = false;
+                        cell.KillCell();
                         break;
                 }
             }
@@ -55,7 +55,7 @@ namespace GameOfLife
         {
             foreach (var cell in World.Cells)
             {
-                cell.NumberOfLiveNeighbours = 0;
+                cell.ResetNumberOfLiveNeighboursToZero();
             }
         }
 
@@ -64,7 +64,7 @@ namespace GameOfLife
             var neighbours = ReturnNeighbours(liveCell);
             foreach (var cell in neighbours)
             {
-                cell.NumberOfLiveNeighbours++;
+                cell.IncrementNumberOfLiveNeighbours();
             }
         }
 

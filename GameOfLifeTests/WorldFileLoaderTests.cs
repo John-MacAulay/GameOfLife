@@ -29,7 +29,7 @@ namespace GameOfLifeTests
             };
             foreach (var cell in cellsToBeAlive)
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             var worldFileSave = new WorldFileSaver(world, _testFolder);

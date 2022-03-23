@@ -6,7 +6,7 @@ namespace GameOfLife
 {
     public class World
     {
-        public int CurrentGenerationNumber { get; set; }
+        public int CurrentGenerationNumber { get; private set; }
         public List<Cell> Cells { get; }
 
         public int Length { get; }
@@ -45,6 +45,11 @@ namespace GameOfLife
         public Cell CellAtThisWorldPosition(Position position)
         {
             return Cells.First(cell => cell.Position == position);
+        }
+
+        public void IncrementGenerationNumber()
+        {
+            CurrentGenerationNumber++;
         }
     }
 }

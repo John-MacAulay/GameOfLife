@@ -29,12 +29,31 @@ namespace GameOfLifeTests
             Assert.Equal(expectedHeightOfCreatedWorld, actualWorld.Height);
         }
 
-        [Fact]
-        public void GivenInValidInputsInSequence_GetWorldFromManualInputsWillLoopUntilValidInputsThenReturnValidWorld()
+        public static IEnumerable<object[]> GetTestInputs()
+        {
+            yield return new object[]
+            {
+               new[] {"0","some invalid input again for length", "12", "invalid input for height","8","q","n"}
+            };
+            yield return new object[]
+            {
+                new[] {"-1","invalid input again for length", "12", "invalid Input for height","8","q","n"}
+            };
+            yield return new object[]
+            {
+                new[] { "[invalid input] zero and negatives invalid for height too", "-2", "12",  "-1", "8","q","n"}
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(GetTestInputs))]
+        
+        public void GivenInValidInputsInSequence_GetWorldFromManualInputsWillLoopUntilValidInputsThenReturnValidWorld
+        (string [] userInputs)
         {
             // Arrange 
             var output = new TestOutput();
-            var input = new TestInput(new[] {"Invalid Input for Length","invalid again", "12", "Invalid Input for Height","8","q","n"});
+            var input = new TestInput(userInputs);
             var generator = new WorldGenerator(output, input);
 
             // Act 

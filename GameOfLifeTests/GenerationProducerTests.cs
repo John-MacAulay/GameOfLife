@@ -127,7 +127,7 @@ namespace GameOfLifeTests
                     .ToList();
             foreach (var cell in cellToMakeLive)
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             var nextGen = new GenerationProducer(world);
@@ -213,7 +213,7 @@ namespace GameOfLifeTests
                     .ToList();
             foreach (var cell in cellToMakeLive)
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             var nextGen = new GenerationProducer(world);
@@ -266,7 +266,7 @@ namespace GameOfLifeTests
                     .ToList();
             foreach (var cell in cellToMakeLive)
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             var nextGen = new GenerationProducer(world);
@@ -310,7 +310,7 @@ namespace GameOfLifeTests
                     .ToList();
             foreach (var cell in cellToMakeLive)
             {
-                cell.IsAlive = true;
+                cell.MakeCellAlive();
             }
 
             var nextGen = new GenerationProducer(world);

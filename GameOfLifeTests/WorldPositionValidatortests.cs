@@ -26,7 +26,7 @@ namespace GameOfLifeTests
         }
         [Theory]
         [InlineData(20, 15, "invalid,5")]
-        [InlineData(20, 15, "a,invalid")]
+        [InlineData(20, 15, "4,invalid")]
         public void    TryParseStringToPosition_WhenGivenIntParsableString_WithInvalidValues_WillReturnFalse(
             int worldLength, int worldHeight, string stringToCheck)
         {

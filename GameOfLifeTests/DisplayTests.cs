@@ -15,9 +15,9 @@ namespace GameOfLifeTests
             var world = new World(3, 3);
             const int displaySleep = 0;
             var firstCellToMakeLive = world.CellAtThisWorldPosition(new Position(0, 0));
-            firstCellToMakeLive.IsAlive = true;
+            firstCellToMakeLive.MakeCellAlive();
             var secondCellToMakeLive = world.CellAtThisWorldPosition(new Position(1, 2));
-            secondCellToMakeLive.IsAlive = true;
+            secondCellToMakeLive.MakeCellAlive();
             display.ShowWorld(world, displaySleep);
 
             // Act 
