@@ -16,7 +16,7 @@ namespace GameOfLifeTests
         {
             // Assert
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
 
             // Act
             var actualBool = validator.TryParseStringToPosition(stringToCheck);
@@ -32,7 +32,7 @@ namespace GameOfLifeTests
         {
             // Assert
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
 
             // Act
             var actualBool = validator.TryParseStringToPosition(stringToCheck);
@@ -55,7 +55,7 @@ namespace GameOfLifeTests
         {
             // Assert
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
 
             // Act
             var actualBool = validator.TryParseStringToPosition(stringToCheck);
@@ -70,7 +70,7 @@ namespace GameOfLifeTests
         {
             // Assert
             var world = new World(20, 15);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
 
             // Act
             var actual = validator.ValidatedPosition;
@@ -90,7 +90,7 @@ namespace GameOfLifeTests
         {
             // Assert
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
             var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
 
             // Act
@@ -120,7 +120,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
             var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
 
             // Act 
@@ -168,7 +168,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var world = new World(worldLength, worldHeight);
-            var validator = new WorldPositionValidator(world);
+            var validator = new TwoDimensionalWorldPositionValidator(world);
             var validationIsTrue = validator.TryParseStringToPosition(stringToCheck);
             var secondValidationIsTrue = validator.TryParseStringToPosition(secondCheckedString);
             // Act 

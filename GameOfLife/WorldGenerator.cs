@@ -22,8 +22,7 @@ namespace GameOfLife
             var heightAsInt = GetWorldParameter("height");
 
             World = new World(lengthAsInt, heightAsInt);
-            ManuallyAddLiveCellPositions(); 
-            //CheckAndSaveWorldIfRequired();
+            ManuallyAddLiveCellPositions();
             return World;
         }
 
@@ -36,6 +35,10 @@ namespace GameOfLife
                 _display.PromptForWorldParameter(prompt);
                 var response = _input.GetText();
                 success = int.TryParse(response, out requiredInt);
+                if (requiredInt < 1)
+                {
+                    success = false;
+                }
             }
 
             return requiredInt;
@@ -61,8 +64,10 @@ namespace GameOfLife
         private string AddNewLiveCellPositionFromUserInput(World world, List<Position> positionsForLiveCells)
         {
             _display.PromptForLiveCellSeedPosition();
+
             var userInputForPosition = _input.GetText();
-            var worldPositionValidator = new WorldPositionValidator(world);
+
+            var worldPositionValidator = new TwoDimensionalWorldPositionValidator(world);
             if (worldPositionValidator.TryParseStringToPosition(userInputForPosition))
             {
                 positionsForLiveCells.Add(worldPositionValidator.ValidatedPosition);

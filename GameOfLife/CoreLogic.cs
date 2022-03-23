@@ -16,6 +16,7 @@ namespace GameOfLife
 
         public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep, string pathToSavedGamesFolder)
         {
+            
             _input = input;
             _output = output;
             _display = new Display(_output);
@@ -27,6 +28,7 @@ namespace GameOfLife
         {
             var worldProvider = new WorldProvider(_output, _input, _pathToSavedGamesFolder);
             _world = worldProvider.RetrieveWorld();
+            
             _display.ShowWorld(_world, _displayMillisecondSleep);
             var generations = new GenerationProducer(_world);
             while (!_world.IsEmpty())
@@ -35,5 +37,6 @@ namespace GameOfLife
                 _display.ShowWorld(_world, _displayMillisecondSleep);
             }
         }
+        
     }
 }

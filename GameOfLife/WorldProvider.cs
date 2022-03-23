@@ -52,6 +52,7 @@ namespace GameOfLife
             var reader = new WorldFileLoader(_pathToSavedGamesFolder);
             _world = reader.LoadJsonLocal(fileNamesToDisplay[saveGameNumber - 1]);
         }
+        
         private void CheckAndSaveWorldIfRequired()
         {
             _display.PromptForCheckIfSaveWorld();

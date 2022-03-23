@@ -1,11 +1,11 @@
 namespace GameOfLife
 {
-    public class WorldPositionValidator
+    public class TwoDimensionalWorldPositionValidator
     {
         private readonly World _world;
         private const int WorldDimensionalParameters = 2;
 
-        public WorldPositionValidator(World world)
+        public TwoDimensionalWorldPositionValidator(World world)
         {
             _world = world;
         }
