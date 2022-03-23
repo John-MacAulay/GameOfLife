@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,12 +66,10 @@ namespace GameOfLife
         private List<string> RetrieveFileNamesToDisplay()
         {
             var savedGameFiles = System.IO.Directory.GetFiles(_pathToSavedGamesFolder, "*.json");
-            var fileNamesToDisplay = (from fileName in savedGameFiles
-                select fileName[30..]
-                into fileNameShortened
-                let stringLength = fileNameShortened.Length
-                select fileNameShortened.Remove(stringLength - 5)).ToList();
-            return fileNamesToDisplay;
+
+            return (from filename in savedGameFiles let indexToCutAt =
+                filename.LastIndexOf("/", StringComparison.Ordinal) select filename[(indexToCutAt + 1)..]
+                into trimmedFile select trimmedFile.Remove(trimmedFile.Length - 5)).ToList();
         }
 
         private int LetUserChooseSavedFileToLoad(int saveGameNumber, List<string> fileNamesToDisplay)

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using GameOfLife;
 using Xunit;
 
@@ -18,11 +20,12 @@ namespace GameOfLifeTests
             var world = new World(10, 6);
             var cellsToBeAlive = new List<Cell>()
             {
-                world.CellAtThisWorldPosition(new Position(0, 0)),
                 world.CellAtThisWorldPosition(new Position(1, 0)),
+                world.CellAtThisWorldPosition(new Position(0, 0)),
                 world.CellAtThisWorldPosition(new Position(2, 0)),
                 world.CellAtThisWorldPosition(new Position(0, 1)),
                 world.CellAtThisWorldPosition(new Position(4, 0))
+                
             };
             foreach (var cell in cellsToBeAlive)
             {
@@ -37,33 +40,33 @@ namespace GameOfLifeTests
             var actualReturnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
             var actualTypeOfObject = actualReturnedWorld.GetType();
             var actualCellCount = actualReturnedWorld.Cells.Count;
-            var actualLivePositions = actualReturnedWorld.Cells.Where(cell => cell.IsAlive).ToList().Select(cell => cell.Position).ToList();
+            var actualLivePositionsInOrder = actualReturnedWorld.Cells.Where(cell => cell.IsAlive).ToList()
+                .Select(cell => cell.Position).OrderBy(cell => cell.Row).ThenBy(cell => cell.Column).ToList();
 
             // Arrange
             const int expectedNumberOfCells = 60;
-            var expectedLivePositions = new List<Position>()
+            var expectedLivePositionsInOrder = new List<Position>()
             {
-                new (0, 0),
-                new (1, 0),
-                new (2, 0),
-                new (0, 1),
-                new (4, 0)
-
+                new(0, 0),
+                new(1, 0),
+                new(2, 0),
+                new(4, 0),
+                new(0, 1)
             };
-            foreach (var expectedLivePosition in expectedLivePositions)
+            foreach (var expectedLivePosition in expectedLivePositionsInOrder)
             {
-                Assert.Contains(actualLivePositions, actualPosition => actualPosition == expectedLivePosition);
+                Assert.Contains(actualLivePositionsInOrder, actualPosition => actualPosition == expectedLivePosition);
             }
-            
-            var expectedType =world.GetType();
-            Assert.NotNull(actualReturnedWorld);
-            Assert.Equal(expectedType,actualTypeOfObject);
-            Assert.Equal(expectedNumberOfCells, actualCellCount);
-            Assert.Equal(expectedLivePositions[0], actualLivePositions[0]);
-            
-            
+
            
-      
+            Assert.NotNull(actualReturnedWorld);
+            Assert.True(actualTypeOfObject  == typeof(World) );
+            Assert.Equal(expectedNumberOfCells, actualCellCount);
+            for (var i = 0; i < expectedLivePositionsInOrder.Count; i++)
+            {
+                Assert.Equal(expectedLivePositionsInOrder[i],actualLivePositionsInOrder[i]);
+            }
         }
+
     }
 }

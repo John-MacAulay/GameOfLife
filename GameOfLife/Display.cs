@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace GameOfLife
 {
@@ -29,7 +30,7 @@ namespace GameOfLife
                 $"If you have finished entering live cells enter 'q' to quit");
         }
 
-        public void ShowWorld(World world)
+        public void ShowWorld(World world, int millisecondsSleep)
         {
             _output.ClearDisplay();
             var worldAsGrid = new StringBuilder();
@@ -50,6 +51,7 @@ namespace GameOfLife
             }
 
             _output.PrintText(worldAsGrid.ToString());
+            Thread.Sleep(millisecondsSleep);
         }
 
         public void OfferChoiceForGeneratingWorld()

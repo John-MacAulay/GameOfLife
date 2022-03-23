@@ -22,20 +22,9 @@ namespace GameOfLife
             var heightAsInt = GetWorldParameter("height");
 
             World = new World(lengthAsInt, heightAsInt);
-            ManuallyAddLiveCellPositions();
-            // CheckAndSaveWorldIfRequired();
+            ManuallyAddLiveCellPositions(); 
+            //CheckAndSaveWorldIfRequired();
             return World;
-        }
-
-        private void CheckAndSaveWorldIfRequired()
-        {
-            _display.PromptForCheckIfSaveWorld();
-            var response = _input.GetText().ToLower();
-            if (response is not ("y" or "yes")) return;
-            _display.PromptForSaveName();
-            var nameToSaveUnder = _input.GetText();
-            var saver = new WorldFileSaver(World, $@"..//..//..//..//./SavedWorlds/");
-            saver.SaveJsonLocal(nameToSaveUnder);
         }
 
         private int GetWorldParameter(string prompt)

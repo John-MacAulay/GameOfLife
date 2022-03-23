@@ -27,13 +27,12 @@ namespace GameOfLife
         {
             var worldProvider = new WorldProvider(_output, _input, _pathToSavedGamesFolder);
             _world = worldProvider.RetrieveWorld();
-            _display.ShowWorld(_world);
+            _display.ShowWorld(_world, _displayMillisecondSleep);
             var generations = new GenerationProducer(_world);
             while (!_world.IsEmpty())
             {
                 generations.MakeNextGeneration();
-                Thread.Sleep(_displayMillisecondSleep);
-                _display.ShowWorld(_world);
+                _display.ShowWorld(_world, _displayMillisecondSleep);
             }
         }
     }
