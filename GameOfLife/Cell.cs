@@ -14,6 +14,13 @@ namespace GameOfLife
             Position = position;
         }
 
+        [JsonConstructor]
+        public Cell(Position position, bool isAlive)
+        {
+            Position = position;
+            IsAlive = isAlive;
+        }
+        
         public void ResetNumberOfLiveNeighboursToZero()
         {
             NumberOfLiveNeighbours = 0;

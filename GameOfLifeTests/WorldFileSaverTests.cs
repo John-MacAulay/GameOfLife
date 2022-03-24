@@ -7,8 +7,8 @@ namespace GameOfLifeTests
 {
     public class WorldFileSaverTests
     {
-        private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
-
+      //  private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+        private readonly string _testFolder = $@"/Users/John.MacAulay/Documents/GameOfLifeTestSaves";
 
         [Fact]
         public void GivenAValidWorld_SaveJsonLocal_WillSaveThisWoldFileInJsonFormatToLocalFolder()

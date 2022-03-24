@@ -9,9 +9,10 @@ namespace GameOfLifeTests
 {
     public class WorldFileLoaderTests
     {
-        //  need to have files that aren't Json and make sure this is handled correct;y
+
         // need to have some test files that aren't valid as co-ordinates are out of world range and make these fail gracefully
-        private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+        //private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+        private readonly string _testFolder = $@"/Users/John.MacAulay/Documents/GameOfLifeTestSaves/";
 
         [Fact]
         public void GivenAValidFile_LoadJsonLocal_WillReturnAValidWorldAccordingToJsonFileParameters()
