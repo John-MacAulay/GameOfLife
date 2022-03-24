@@ -11,7 +11,10 @@ namespace GameOfLife
         private readonly IOutput _output;
         private readonly string _middleDot = char.ConvertFromUtf32(0x000000B7);
 
-        public Display(IOutput output)
+        private readonly string _littleCircle = '\u25e6'.ToString();
+        private readonly string _bigCircle = '\u25c9'.ToString();
+        private readonly string _openCircle = '\u25cb'.ToString();
+     public Display(IOutput output)
         {
             _output = output;
         }
@@ -32,26 +35,37 @@ namespace GameOfLife
 
         public void ShowWorld(World world, int millisecondsSleep)
         {
-            _output.ClearDisplay();
-            var worldAsGrid = new StringBuilder();
-            worldAsGrid.Append($"{Environment.NewLine}");
-            worldAsGrid.Append(
-                $" Generation {world.CurrentGenerationNumber} {Environment.NewLine}{Environment.NewLine}");
-
-            for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
+            var displayList = new List<string>()
             {
-                for (var columnPosition = 0; columnPosition < world.Length; columnPosition++)
+                _littleCircle,
+                _bigCircle,
+                _openCircle
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                _output.ClearDisplay();
+
+
+                var worldAsGrid = new StringBuilder();
+                worldAsGrid.Append($"{Environment.NewLine}");
+                worldAsGrid.Append(
+                    $" Generation {world.CurrentGenerationNumber} {Environment.NewLine}{Environment.NewLine}");
+
+                for (var rowPosition = 0; rowPosition < world.Height; rowPosition++)
                 {
-                    var position = new Position(columnPosition, rowPosition);
-                    var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position);
-                    worldAsGrid.Append(cellToDefineDisplay.IsAlive ? " *" : $" {_middleDot}");
+                    for (var columnPosition = 0; columnPosition < world.Length; columnPosition++)
+                    {
+                        var position = new Position(columnPosition, rowPosition);
+                        var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position);
+                        worldAsGrid.Append(cellToDefineDisplay.IsAlive ? $" {displayList[i]}" : $" {_middleDot}");
+                    }
+
+                    worldAsGrid.Append($"{Environment.NewLine}");
                 }
 
-                worldAsGrid.Append($"{Environment.NewLine}");
+                _output.PrintText(worldAsGrid.ToString());
+                Thread.Sleep(millisecondsSleep/3);
             }
-
-            _output.PrintText(worldAsGrid.ToString());
-            Thread.Sleep(millisecondsSleep);
         }
 
         public void OfferChoiceForGeneratingWorld()

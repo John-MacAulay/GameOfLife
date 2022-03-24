@@ -61,7 +61,7 @@ namespace GameOfLife
             }
         }
 
-        private string AddNewLiveCellPositionFromUserInput(World world, List<Position> positionsForLiveCells)
+        private string AddNewLiveCellPositionFromUserInput(World world, ICollection<Position> positionsForLiveCells)
         {
             _display.PromptForLiveCellSeedPosition();
 
