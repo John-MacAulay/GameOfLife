@@ -61,6 +61,7 @@ namespace GameOfLife
                     worldAsGrid.Append($"{Environment.NewLine}");
                 }
 
+                worldAsGrid.Append($"{Environment.NewLine} Press 'q' to quit.");
                 _output.PrintText(worldAsGrid.ToString());
                 Thread.Sleep(millisecondsSleep / displayPhases.Count );
             }
