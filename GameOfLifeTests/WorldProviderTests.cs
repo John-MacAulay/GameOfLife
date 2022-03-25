@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Linq;
 using GameOfLife;
 using Xunit;
 
@@ -8,7 +6,6 @@ namespace GameOfLifeTests
 {
     public class WorldProviderTests
     {
-        //need to write some tests regrading when the 
 
         private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
         [Fact]
@@ -16,7 +13,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new string[]{"anything but l","6","10","2,3", "3,7","q", "n"});
+            var testInput = new TestInput(new[]{"anything but l","6","10","2,3", "3,7","q", "n"});
             var provider = new WorldProvider(testOutput, testInput, _testFolder);
             
             // Act
@@ -24,6 +21,7 @@ namespace GameOfLifeTests
             var returnedObjectType = world.GetType();
             var sampleLiveCell = world.CellAtThisWorldPosition(new Position(3,7));
             var sampleDeadCell = world.CellAtThisWorldPosition(new Position(4,7));
+            
             //Assert
             const int expectedLengthOfWorld = 6;
             Assert.True(returnedObjectType  == typeof(World) );
@@ -36,7 +34,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new string[]{"anything but l","10","12","4,5", "invalid" , "2,2","q", "y","Save this world"});
+            var testInput = new TestInput(new[]{"anything but l","10","12","4,5", "invalid" , "2,2","q", "y","Save this world"});
             var provider = new WorldProvider(testOutput, testInput, _testFolder);
             
             // Act
@@ -44,7 +42,7 @@ namespace GameOfLifeTests
             var returnedObjectType = world.GetType();
             var sampleLiveCell = world.CellAtThisWorldPosition(new Position(2,2));
             var sampleDeadCell = world.CellAtThisWorldPosition(new Position(4,7));
-            var savedGameFiles = System.IO.Directory.GetFiles(_testFolder, "*.json");
+            var savedGameFiles = Directory.GetFiles(_testFolder, "*.json");
             
             //Assert
             const int expectedLengthOfWorld = 10;
@@ -62,7 +60,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new string[]{"l", "1"});
+            var testInput = new TestInput(new[]{"l", "1"});
             var provider = new WorldProvider(testOutput, testInput, _testFolder);
             
             // Act

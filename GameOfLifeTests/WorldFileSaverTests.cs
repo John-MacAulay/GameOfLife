@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using GameOfLife;
@@ -7,14 +8,21 @@ namespace GameOfLifeTests
 {
     public class WorldFileSaverTests
     {
-      //  private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
-        private readonly string _testFolder = $@"/Users/John.MacAulay/Documents/GameOfLifeTestSaves";
+  
+        private static string UseThisTestFolder()
+        {
+            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var testFolder = $"{folderPath}/Documents/GameOfLifeTestSaves";
+            Directory.CreateDirectory($@"{testFolder}");
+            return testFolder;
+        }
 
         [Fact]
         public void GivenAValidWorld_SaveJsonLocal_WillSaveThisWoldFileInJsonFormatToLocalFolder()
         {
             // Arrange 
-            var filePathToCheck = _testFolder + "/TinyWorld.json";
+            var testFolder = UseThisTestFolder();
+            var filePathToCheck = testFolder + "/TinyWorld.json";
             if (File.Exists(filePathToCheck))
             {
                 File.Delete(filePathToCheck);
@@ -32,7 +40,7 @@ namespace GameOfLifeTests
                 cell.MakeCellAlive();
             }
             
-            var worldFileSave = new WorldFileSaver(world, _testFolder);
+            var worldFileSave = new WorldFileSaver(world, testFolder);
             worldFileSave.SaveJsonLocal("TinyWorld");
 
             // Act

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using GameOfLife;
@@ -10,14 +11,19 @@ namespace GameOfLifeTests
     public class WorldFileLoaderTests
     {
 
-        // need to have some test files that aren't valid as co-ordinates are out of world range and make these fail gracefully
-        //private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
-        private readonly string _testFolder = $@"/Users/John.MacAulay/Documents/GameOfLifeTestSaves/";
+        private static string UseThisTestFolder()
+        {
+            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var testFolder = $"{folderPath}/Documents/GameOfLifeTestSaves";
+            Directory.CreateDirectory($@"{testFolder}");
+            return testFolder;
+        }
 
         [Fact]
         public void GivenAValidFile_LoadJsonLocal_WillReturnAValidWorldAccordingToJsonFileParameters()
         {
             // Arrange 
+            var testFolder = UseThisTestFolder();
             var world = new World(10, 6);
             var cellsToBeAlive = new List<Cell>()
             {
@@ -33,9 +39,9 @@ namespace GameOfLifeTests
                 cell.MakeCellAlive();
             }
 
-            var worldFileSave = new WorldFileSaver(world, _testFolder);
+            var worldFileSave = new WorldFileSaver(world, testFolder);
             worldFileSave.SaveJsonLocal("OfficialWorldSave");
-            var reader = new WorldFileLoader(_testFolder);
+            var reader = new WorldFileLoader(testFolder);
 
             // Act
             var actualReturnedWorld = reader.LoadJsonLocal("OfficialWorldSave");
