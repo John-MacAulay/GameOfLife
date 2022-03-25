@@ -5,15 +5,30 @@ namespace GameOfLife
 {
     class Program
     {
-        private static readonly string SaveFolder = $@"/Users/John.MacAulay/Documents/GameOfLifeSaves";
+ 
         static void Main(string[] args)
         {
-            Directory.CreateDirectory($@"/Users/John.MacAulay/Documents/GameOfLifeSaves");
+            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var saveFolder = $"{folderPath}/Documents/GameOfLifeSaves";
+            Directory.CreateDirectory($@"{saveFolder}");
+            
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
-            var core = new CoreLogic(output, input, 1000,  SaveFolder );
+            var worldProvider = new WorldProvider(output, input, saveFolder);
+            var displayTime = 1000;
+            if (args.Length > 0 )
+            {
+                if (int.TryParse(args[0], out  displayTime))
+                {
+                    if (displayTime < 1)
+                    {
+                        displayTime = 1000;
+                    }
+                }
+            }
+
+            var core = new CoreLogic(output, input, displayTime, worldProvider);
             core.PlayGame();
         }
-        
     }
 }

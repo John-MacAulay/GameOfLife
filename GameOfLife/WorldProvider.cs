@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GameOfLife
 {
-    public class WorldProvider
+    public class WorldProvider : IWorldProvider
     {
         private readonly IInput _input;
         private readonly Display _display;
@@ -27,24 +27,24 @@ namespace GameOfLife
             var load = _input.GetText().ToLower();
             if (load != "l")
             {
-                ChooseWorldFromManualInputs();
+                MakeWorldFromManualInputs();
                 CheckAndSaveWorldIfRequired();
             }
             else
             {
-                ChooseWorldFromSavedWorlds();
+                RetrieveWorldFromSavedWorlds();
             }
 
             return _world;
         }
 
-        private void ChooseWorldFromManualInputs()
+        private void MakeWorldFromManualInputs()
         {
             var worldGenerator = new WorldGenerator(_output, _input);
             _world = worldGenerator.GetWorldFromManualInputs();
         }
 
-        private void ChooseWorldFromSavedWorlds()
+        private void RetrieveWorldFromSavedWorlds()
         {
             var fileNamesToDisplay = RetrieveFileNamesToDisplay();
             var saveGameNumber = 0;

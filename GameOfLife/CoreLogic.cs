@@ -8,32 +8,28 @@ namespace GameOfLife
     {
         private readonly IInput _input;
         private readonly Display _display;
-        private readonly IOutput _output;
         private readonly int _displayMillisecondSleep;
-        private readonly string _pathToSavedGamesFolder;
+        private readonly IWorldProvider _worldProvider;
         private World _world;
 
 
-        public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep, string pathToSavedGamesFolder)
+        public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep,
+            IWorldProvider worldProvider)
         {
-            
             _input = input;
-            _output = output;
-            _display = new Display(_output);
+            _display = new Display(output);
             _displayMillisecondSleep = displayMillisecondSleep;
-            _pathToSavedGamesFolder = pathToSavedGamesFolder;
+            _worldProvider = worldProvider;
         }
 
         public void PlayGame()
         {
-            var worldProvider = new WorldProvider(_output, _input, _pathToSavedGamesFolder);
-            _world = worldProvider.RetrieveWorld();
-            
+            _world = _worldProvider.RetrieveWorld();
             _display.ShowWorld(_world, _displayMillisecondSleep);
-            var generations = new GenerationProducer(_world);
+            var producer = new GenerationProducer(_world);
             while (!_world.IsEmpty())
             {
-                generations.MakeNextGeneration();
+                producer.MakeNextGeneration();
                 _display.ShowWorld(_world, _displayMillisecondSleep);
             }
         }

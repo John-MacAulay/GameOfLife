@@ -10,11 +10,11 @@ namespace GameOfLife
     {
         private readonly IOutput _output;
         private readonly string _middleDot = char.ConvertFromUtf32(0x000000B7);
-
         private readonly string _littleCircle = '\u25e6'.ToString();
         private readonly string _bigCircle = '\u25c9'.ToString();
         private readonly string _openCircle = '\u25cb'.ToString();
-     public Display(IOutput output)
+
+        public Display(IOutput output)
         {
             _output = output;
         }
@@ -35,17 +35,15 @@ namespace GameOfLife
 
         public void ShowWorld(World world, int millisecondsSleep)
         {
-            var displayList = new List<string>()
+            var displayPhases = new List<string>()
             {
                 _littleCircle,
                 _bigCircle,
                 _openCircle
             };
-            for (int i = 0; i < 3; i++)
+            foreach (var phase in displayPhases)
             {
                 _output.ClearDisplay();
-
-
                 var worldAsGrid = new StringBuilder();
                 worldAsGrid.Append($"{Environment.NewLine}");
                 worldAsGrid.Append(
@@ -57,14 +55,14 @@ namespace GameOfLife
                     {
                         var position = new Position(columnPosition, rowPosition);
                         var cellToDefineDisplay = world.Cells.First(cell => cell.Position == position);
-                        worldAsGrid.Append(cellToDefineDisplay.IsAlive ? $" {displayList[i]}" : $" {_middleDot}");
+                        worldAsGrid.Append(cellToDefineDisplay.IsAlive ? $" {phase}" : $" {_middleDot}");
                     }
 
                     worldAsGrid.Append($"{Environment.NewLine}");
                 }
 
                 _output.PrintText(worldAsGrid.ToString());
-                Thread.Sleep(millisecondsSleep/3);
+                Thread.Sleep(millisecondsSleep / displayPhases.Count );
             }
         }
 
@@ -83,7 +81,8 @@ namespace GameOfLife
 
         public void PromptForSaveName()
         {
-            _output.PrintText($"{Environment.NewLine} Please enter the file name you would like this world saved under.");
+            _output.PrintText(
+                $"{Environment.NewLine} Please enter the file name you would like this world saved under.");
         }
 
         public void ShowSavedGameFiles(List<string> fileNamesToDisplay)
@@ -95,7 +94,6 @@ namespace GameOfLife
                 numberSavedFiles++;
                 _output.PrintText($" {numberSavedFiles}. {file}");
             }
-            
         }
 
         public void PromptForSaveToLoad()
