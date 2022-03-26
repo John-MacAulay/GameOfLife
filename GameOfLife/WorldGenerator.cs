@@ -10,10 +10,10 @@ namespace GameOfLife
         private readonly Display _display;
         private World World { get; set; }
 
-        public WorldGenerator(IOutput output, IInput input)
+        public WorldGenerator(Display display, IInput input)
         {
             _input = input;
-            _display = new Display(output);
+            _display = display;
         }
 
         public World GetWorldFromManualInputs()

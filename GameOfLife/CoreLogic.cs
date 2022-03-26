@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace GameOfLife
 {
@@ -10,19 +6,41 @@ namespace GameOfLife
         private readonly IInput _input;
         private readonly Display _display;
         private readonly int _displayMillisecondSleep;
-        private readonly IWorldProvider _worldProvider;
+        private IWorldProvider _worldProvider;
         private World _world;
+        private readonly string _pathToSaveFolder;
 
 
         public CoreLogic(IOutput output, IInput input, int displayMillisecondSleep,
-            IWorldProvider worldProvider)
+            string pathToSaveFolder)
         {
             _input = input;
             _display = new Display(output);
             _displayMillisecondSleep = displayMillisecondSleep;
-            _worldProvider = worldProvider;
+            _pathToSaveFolder = pathToSaveFolder;
+            
         }
 
+        public void LogicRun()
+        {
+            ChooseWhereToSourceWorld();
+            PlayGame();
+        }
+
+        public void ChooseWhereToSourceWorld()
+        {
+            _display.OfferChoiceForGeneratingWorld();
+            var load = _input.GetText().ToLower();
+            if (load != "l")
+            {
+                _worldProvider = new ManualWorldProvider(_display, _input, _pathToSaveFolder);
+            }
+            else
+            {
+                _worldProvider = new SavedWorldProvider(_display, _input, _pathToSaveFolder);
+            }
+        }
+        
         public void PlayGame()
         {
             _world = _worldProvider.RetrieveWorld();

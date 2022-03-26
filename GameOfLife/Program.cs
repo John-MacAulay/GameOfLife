@@ -14,7 +14,6 @@ namespace GameOfLife
             
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
-            var worldProvider = new WorldProvider(output, input, saveFolder);
             var displayTime = 1000;
             if (args.Length > 0 )
             {
@@ -27,8 +26,9 @@ namespace GameOfLife
                 }
             }
 
-            var core = new CoreLogic(output, input, displayTime, worldProvider);
-            core.PlayGame();
+            var core = new CoreLogic(output, input, displayTime, saveFolder);
+            // core.PlayGame();
+            core.LogicRun();
         }
     }
 }

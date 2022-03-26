@@ -11,9 +11,9 @@ namespace GameOfLifeTests
         public void GivenValidInputsInSequence_GetWorldFromManualInputsWillReturnAValidWorldOfAppropriateSize()
         {
             // Arrange 
-            var output = new TestOutput();
+            var display = new Display( new TestOutput());
             var input = new TestInput(new[] {"10","15","q","n"});
-            var generator = new WorldGenerator(output, input);
+            var generator = new WorldGenerator(display, input);
             
             // Act
             var actualWorld = generator.GetWorldFromManualInputs();
@@ -53,8 +53,9 @@ namespace GameOfLifeTests
         {
             // Arrange 
             var output = new TestOutput();
+            var display = new Display( output);
             var input = new TestInput(userInputs);
-            var generator = new WorldGenerator(output, input);
+            var generator = new WorldGenerator(display, input);
 
             // Act 
             var actualWorld = generator.GetWorldFromManualInputs();
@@ -108,8 +109,9 @@ namespace GameOfLifeTests
         {
             // Arrange 
             var output = new TestOutput();
+            var display = new Display(output);
             var input = new TestInput(userInput);
-            var generator = new WorldGenerator(output, input);
+            var generator = new WorldGenerator(display, input);
             var world = generator.GetWorldFromManualInputs();
 
             // Act 
