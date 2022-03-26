@@ -6,6 +6,7 @@ namespace GameOfLifeTests
     {
         private readonly string[] _fakeInput;
         private int _getInputPosition;
+        private int _countUntilBreak;
 
         public TestInput(string[] fakeInput)
         {
@@ -15,6 +16,12 @@ namespace GameOfLifeTests
         public string GetText()
         {
             return _fakeInput[_getInputPosition++];
+        }
+
+        public bool CheckForBreak()
+        {
+            _countUntilBreak++;
+            return _countUntilBreak == 12;
         }
     }
 }

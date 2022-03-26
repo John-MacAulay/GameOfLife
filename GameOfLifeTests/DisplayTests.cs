@@ -37,19 +37,22 @@ namespace GameOfLifeTests
             Assert.Equal(expectedClear, actualClearScreen1);
 
             var expected = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
-                           $" {_littleCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_littleCircle} ·{Environment.NewLine}";
+                           $" {_littleCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_littleCircle} ·" +
+                           $"{Environment.NewLine}{Environment.NewLine} Press 'q' to quit.";
             Assert.Equal(expected, actual);
 
             Assert.Equal(expectedClear, actualClearScreen2);
 
             var expectedPhase2 = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
-                                 $" {_bigCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_bigCircle} ·{Environment.NewLine}";
+                                 $" {_bigCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_bigCircle} ·" +
+                                 $"{Environment.NewLine}{Environment.NewLine} Press 'q' to quit.";
             Assert.Equal(expectedPhase2, actual2);
 
             Assert.Equal(expectedClear, actualClearScreen3);
             
             var expectedPhase3 = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
-                                 $" {_openCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_openCircle} ·{Environment.NewLine}";
+                                 $" {_openCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_openCircle} ·" +
+                                 $"{Environment.NewLine}{Environment.NewLine} Press 'q' to quit.";
             Assert.Equal(expectedPhase3, actual3);
         }
     }

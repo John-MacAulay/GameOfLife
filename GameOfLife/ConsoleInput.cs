@@ -9,5 +9,10 @@ namespace GameOfLife
             var needThis = Console.ReadLine();
             return needThis;
         }
+
+        public bool CheckForBreak()
+        { 
+           return  Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Q;
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace GameOfLife
     {
         public int CurrentGenerationNumber { get; private set; }
         public List<Cell> Cells { get; }
+        
+        public int? Periodicity { get; private set; }
 
         public int Length { get; }
         public int Height { get; }
@@ -29,12 +31,13 @@ namespace GameOfLife
         }
         
         [JsonConstructor]
-        public World(int length, int height, List<Cell> cells, int currentGenerationNumber)
+        public World(int length, int height, List<Cell> cells, int currentGenerationNumber, int? periodicity)
         {
             Height = height;
             Length = length;
             Cells = cells;
             CurrentGenerationNumber = currentGenerationNumber;
+            Periodicity = periodicity;
         }
 
         public bool IsEmpty()
@@ -50,6 +53,17 @@ namespace GameOfLife
         public void IncrementGenerationNumber()
         {
             CurrentGenerationNumber++;
+        }
+
+        public void SetPeriodicity(int? periodicity)
+        {
+            Periodicity = periodicity;
+        }
+
+        public List<Position> RetrieveLiveCellPositions()
+        {
+            var liveCell =  Cells.Where(cell => cell.IsAlive == true).ToList();
+            return liveCell.Select(cell => cell.Position).ToList();
         }
     }
 }

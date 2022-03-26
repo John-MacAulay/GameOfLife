@@ -5,11 +5,15 @@ namespace GameOfLife
 {
     public class GenerationProducer
     {
-        private World World { get;  }
+        private World World { get; }
+
+        private List<List<Position>> HistoricalLivePositionsLists { get; set; }
+
 
         public GenerationProducer(World world)
         {
             World = world;
+            HistoricalLivePositionsLists = new List<List<Position>>();
         }
 
         public void MakeNextGeneration()
@@ -17,7 +21,47 @@ namespace GameOfLife
             ResetCurrentLiveNeighboursOfAllCellsToZero();
             UpdateAllCellsNumberOfLiveNeighbours();
             ApplyRulesForNextGenerationLife();
+            CheckForWorldOscillation();
             World.IncrementGenerationNumber();
+        }
+
+        private void CheckForWorldOscillation()
+        {
+            if (World.Periodicity != null)
+            {
+                return;
+            }
+            int? periodicity = null;
+            var isUnique = true;
+            var currentLiveCellPositions = World.RetrieveLiveCellPositions();
+            if (HistoricalLivePositionsLists.Count == 0)
+            {
+                HistoricalLivePositionsLists.Add(currentLiveCellPositions);
+            }
+            else
+            {
+                foreach (var list in HistoricalLivePositionsLists
+                             .Where(list => list.Count == currentLiveCellPositions.Count)
+                             .Where(list => !currentLiveCellPositions.Except(list).Any()))
+                {
+                    isUnique = false;
+                }
+            }
+
+            if (isUnique)
+            {
+                HistoricalLivePositionsLists.Add(currentLiveCellPositions);
+            }
+            else
+            {
+                periodicity = HistoricalLivePositionsLists.Count - 1;
+            }
+
+            if (periodicity != null)
+            {
+                // World.Periodicity = (int) periodicity;
+                World.SetPeriodicity(periodicity);
+            }
         }
 
         private void ApplyRulesForNextGenerationLife()
