@@ -1,7 +1,7 @@
-using GameOfLife;
+using GameOfLife.WorldComponents;
 using Xunit;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.WorldComponentsTests
 {
     public class PositionTests
     {

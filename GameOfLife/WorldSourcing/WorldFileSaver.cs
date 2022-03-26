@@ -1,7 +1,8 @@
 using System.IO;
 using System.Text.Json;
+using GameOfLife.WorldComponents;
 
-namespace GameOfLife
+namespace GameOfLife.WorldSourcing
 {
     public class WorldFileSaver
     {

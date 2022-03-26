@@ -1,23 +1,25 @@
 using System.IO;
 using GameOfLife;
+using GameOfLife.WorldComponents;
+using GameOfLife.WorldSourcing;
 using Xunit;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.WorldSourcingTests
 {
-    public class WorldProviderTests
+    public class ManualWorldSourceTests
     {
-
-        private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+          private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
         [Fact]
-        public void GivenValidInputs_WorldProvider_RetrieveWorld_Using_ManualInputs_WillReturnAValidWorldAsPerInstructions()
+        public void GivenValidInputs_ManualWorldSource_RetrieveWorld_WillReturnAValidWorldAsPerInstructions()
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new[]{"anything but l","6","10","2,3", "3,7","q", "n"});
-            var provider = new WorldProvider(testOutput, testInput, _testFolder);
+            var display = new Display(testOutput);
+            var testInput = new TestInput(new[]{"6","10","2,3", "3,7","q", "n"});
+            var source = new ManualWorldSource(display, testInput, _testFolder);
             
             // Act
-            var world = provider.RetrieveWorld();
+            var world = source.RetrieveWorld();
             var returnedObjectType = world.GetType();
             var sampleLiveCell = world.CellAtThisWorldPosition(new Position(3,7));
             var sampleDeadCell = world.CellAtThisWorldPosition(new Position(4,7));
@@ -30,15 +32,16 @@ namespace GameOfLifeTests
             Assert.False(sampleDeadCell.IsAlive);
         }
         [Fact]
-        public void GivenValidInputs_WorldProvider_RetrieveWorld_Using_ManualInputs_WillSaveAndReturnAValidWorldAsPerInstructions()
+        public void GivenValidInputs_ManualWorldSource_RetrieveWorld_WillSaveAndReturnAValidWorldAsPerInstructions()
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new[]{"anything but l","10","12","4,5", "invalid" , "2,2","q", "y","Save this world"});
-            var provider = new WorldProvider(testOutput, testInput, _testFolder);
+            var display = new Display(testOutput);
+            var testInput = new TestInput(new[]{"10","12","4,5", "invalid" , "2,2","q", "y","Save this world"});
+            var source = new ManualWorldSource(display, testInput, _testFolder);
             
             // Act
-            var world = provider.RetrieveWorld();
+            var world = source.RetrieveWorld();
             var returnedObjectType = world.GetType();
             var sampleLiveCell = world.CellAtThisWorldPosition(new Position(2,2));
             var sampleDeadCell = world.CellAtThisWorldPosition(new Position(4,7));
@@ -54,22 +57,5 @@ namespace GameOfLifeTests
             Assert.False(sampleDeadCell.IsAlive);
             
         }
-        
-        [Fact]
-        public void GivenValidInputs_WorldProvider_RetrieveWorld_ChooseWorldFromSavedWorlds_WillReturnWorldCorrectly()
-        {
-            // Arrange
-            var testOutput = new TestOutput();
-            var testInput = new TestInput(new[]{"l", "1"});
-            var provider = new WorldProvider(testOutput, testInput, _testFolder);
-            
-            // Act
-            var world = provider.RetrieveWorld();
-            var returnedObjectType = world.GetType();
-            
-            // Assert
-            Assert.True(returnedObjectType  == typeof(World) );
-        }
-        
     }
 }

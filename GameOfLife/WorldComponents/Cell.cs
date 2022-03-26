@@ -1,7 +1,6 @@
-using System.ComponentModel.Design;
 using System.Text.Json.Serialization;
 
-namespace GameOfLife
+namespace GameOfLife.WorldComponents
 {
     public class Cell
     {

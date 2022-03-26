@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace GameOfLife
+namespace GameOfLife.WorldComponents
 {
     public class World
     {

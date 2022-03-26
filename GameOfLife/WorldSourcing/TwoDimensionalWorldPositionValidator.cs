@@ -1,4 +1,6 @@
-namespace GameOfLife
+using GameOfLife.WorldComponents;
+
+namespace GameOfLife.WorldSourcing
 {
     public class TwoDimensionalWorldPositionValidator
     {

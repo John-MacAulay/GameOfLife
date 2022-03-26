@@ -1,6 +1,6 @@
 using System;
 
-namespace GameOfLife
+namespace GameOfLife.WorldComponents
 {
     public class Position : IEquatable<Position>
     {

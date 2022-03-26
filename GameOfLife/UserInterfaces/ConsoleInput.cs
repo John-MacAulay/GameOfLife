@@ -1,6 +1,6 @@
 using System;
 
-namespace GameOfLife
+namespace GameOfLife.UserInterfaces
 {
     public class ConsoleInput : IInput
     {

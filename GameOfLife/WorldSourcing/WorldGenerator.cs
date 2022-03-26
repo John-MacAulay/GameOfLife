@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.UserInterfaces;
+using GameOfLife.WorldComponents;
 
-
-namespace GameOfLife
+namespace GameOfLife.WorldSourcing
 {
     public class WorldGenerator
     {
@@ -10,10 +11,10 @@ namespace GameOfLife
         private readonly Display _display;
         private World World { get; set; }
 
-        public WorldGenerator(IOutput output, IInput input)
+        public WorldGenerator(Display display, IInput input)
         {
             _input = input;
-            _display = new Display(output);
+            _display = display;
         }
 
         public World GetWorldFromManualInputs()
@@ -66,7 +67,6 @@ namespace GameOfLife
             _display.PromptForLiveCellSeedPosition();
 
             var userInputForPosition = _input.GetText();
-
             var worldPositionValidator = new TwoDimensionalWorldPositionValidator(world);
             if (worldPositionValidator.TryParseStringToPosition(userInputForPosition))
             {
