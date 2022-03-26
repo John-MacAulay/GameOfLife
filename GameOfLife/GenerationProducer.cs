@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.WorldComponents;
 
 namespace GameOfLife
 {
@@ -8,8 +9,7 @@ namespace GameOfLife
         private World World { get; }
 
         private List<List<Position>> HistoricalLivePositionsLists { get; set; }
-
-
+        
         public GenerationProducer(World world)
         {
             World = world;
@@ -59,7 +59,6 @@ namespace GameOfLife
 
             if (periodicity != null)
             {
-                // World.Periodicity = (int) periodicity;
                 World.SetPeriodicity(periodicity);
             }
         }

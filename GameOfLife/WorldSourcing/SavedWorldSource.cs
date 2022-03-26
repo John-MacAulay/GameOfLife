@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.UserInterfaces;
+using GameOfLife.WorldComponents;
 
-namespace GameOfLife
+namespace GameOfLife.WorldSourcing
 {
-    public class SavedWorldProvider : IWorldProvider
+    public class SavedWorldSource : IWorldSource
     {
         private readonly IInput _input;
         private readonly Display _display;
         private World _world;
         private readonly string _pathToSavedGamesFolder;
 
-        public SavedWorldProvider(Display display, IInput input, string pathToSavedGamesFolder)
+        public SavedWorldSource(Display display, IInput input, string pathToSavedGamesFolder)
         {
             _input = input;
             _display = display;

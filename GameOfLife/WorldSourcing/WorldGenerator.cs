@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.UserInterfaces;
+using GameOfLife.WorldComponents;
 
-
-namespace GameOfLife
+namespace GameOfLife.WorldSourcing
 {
     public class WorldGenerator
     {
@@ -66,7 +67,6 @@ namespace GameOfLife
             _display.PromptForLiveCellSeedPosition();
 
             var userInputForPosition = _input.GetText();
-
             var worldPositionValidator = new TwoDimensionalWorldPositionValidator(world);
             if (worldPositionValidator.TryParseStringToPosition(userInputForPosition))
             {

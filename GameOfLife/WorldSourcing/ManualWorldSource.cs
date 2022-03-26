@@ -1,13 +1,16 @@
-namespace GameOfLife
+using GameOfLife.UserInterfaces;
+using GameOfLife.WorldComponents;
+
+namespace GameOfLife.WorldSourcing
 {
-    public class ManualWorldProvider: IWorldProvider
+    public class ManualWorldSource: IWorldSource
     {
         private readonly IInput _input;
         private readonly Display _display;
         private World _world;
         private readonly string _pathToSavedGamesFolder;
         
-        public ManualWorldProvider(Display display, IInput input, string pathToSavedGamesFolder)
+        public ManualWorldSource(Display display, IInput input, string pathToSavedGamesFolder)
         {
             _input = input;
             _display = display;
@@ -16,7 +19,7 @@ namespace GameOfLife
         public World RetrieveWorld()
         {
             MakeWorldFromManualInputs();
-            CheckAndSaveWorldIfRequired();
+            SaveWorldIfRequired();
             return _world;
         }
         private void MakeWorldFromManualInputs()
@@ -25,7 +28,7 @@ namespace GameOfLife
             _world = worldGenerator.GetWorldFromManualInputs();
         }
 
-        private void CheckAndSaveWorldIfRequired()
+        private void SaveWorldIfRequired()
         {
             _display.PromptForCheckIfSaveWorld();
             var response = _input.GetText().ToLower();

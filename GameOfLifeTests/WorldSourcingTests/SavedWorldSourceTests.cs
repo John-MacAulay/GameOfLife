@@ -1,24 +1,26 @@
 using GameOfLife;
+using GameOfLife.WorldComponents;
+using GameOfLife.WorldSourcing;
 using Xunit;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.WorldSourcingTests
 {
-    public class SavedWorldProviderTests
+    public class SavedWorldSourceTests
     {
         private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
        
       
         [Fact]
-        public void GivenValidInputs_SavedWorldProvider_RetrieveWorld_WillReturnWorldCorrectly()
+        public void GivenValidInputs_SavedWorldSource_RetrieveWorld_WillReturnWorldCorrectly()
         {
             // Arrange
             var testOutput = new TestOutput();
             var display = new Display(testOutput);
             var testInput = new TestInput(new[]{ "1"});
-            var provider = new SavedWorldProvider(display, testInput, _testFolder);
+            var source = new SavedWorldSource(display, testInput, _testFolder);
             
             // Act
-            var world = provider.RetrieveWorld();
+            var world = source.RetrieveWorld();
             var returnedObjectType = world.GetType();
             
             // Assert

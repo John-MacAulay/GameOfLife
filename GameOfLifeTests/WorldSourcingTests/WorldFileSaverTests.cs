@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using GameOfLife;
+using GameOfLife.WorldComponents;
+using GameOfLife.WorldSourcing;
 using Xunit;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.WorldSourcingTests
 {
     public class WorldFileSaverTests
     {

@@ -1,4 +1,5 @@
 using GameOfLife;
+using GameOfLife.UserInterfaces;
 
 namespace GameOfLifeTests
 {
