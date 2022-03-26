@@ -61,6 +61,10 @@ namespace GameOfLife
                     worldAsGrid.Append($"{Environment.NewLine}");
                 }
 
+                if (world.Periodicity != null)
+                {
+                    worldAsGrid.Append($"{Environment.NewLine} Periodicity {world.Periodicity} {Environment.NewLine}");
+                }
                 worldAsGrid.Append($"{Environment.NewLine} Press 'q' to quit.");
                 _output.PrintText(worldAsGrid.ToString());
                 Thread.Sleep(millisecondsSleep / displayPhases.Count );

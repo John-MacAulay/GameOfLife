@@ -32,7 +32,8 @@ namespace GameOfLife
             {
                 producer.MakeNextGeneration();
                 _display.ShowWorld(_world, _displayMillisecondSleep);
-                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Q) break;
+                
+                if (_input.CheckForBreak()) break;
             }
         } 
         
