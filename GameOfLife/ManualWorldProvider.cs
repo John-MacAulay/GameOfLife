@@ -6,7 +6,6 @@ namespace GameOfLife
         private readonly Display _display;
         private World _world;
         private readonly string _pathToSavedGamesFolder;
-
         
         public ManualWorldProvider(Display display, IInput input, string pathToSavedGamesFolder)
         {

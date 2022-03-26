@@ -5,7 +5,6 @@ namespace GameOfLife
 {
     class Program
     {
- 
         static void Main(string[] args)
         {
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -25,9 +24,7 @@ namespace GameOfLife
                     }
                 }
             }
-
             var core = new CoreLogic(output, input, displayTime, saveFolder);
-            // core.PlayGame();
             core.LogicRun();
         }
     }

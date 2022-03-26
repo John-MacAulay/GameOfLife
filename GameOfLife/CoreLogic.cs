@@ -18,7 +18,6 @@ namespace GameOfLife
             _display = new Display(output);
             _displayMillisecondSleep = displayMillisecondSleep;
             _pathToSaveFolder = pathToSaveFolder;
-            
         }
 
         public void LogicRun()
@@ -31,14 +30,9 @@ namespace GameOfLife
         {
             _display.OfferChoiceForGeneratingWorld();
             var load = _input.GetText().ToLower();
-            if (load != "l")
-            {
-                _worldProvider = new ManualWorldProvider(_display, _input, _pathToSaveFolder);
-            }
-            else
-            {
-                _worldProvider = new SavedWorldProvider(_display, _input, _pathToSaveFolder);
-            }
+             _worldProvider =  load == "l"
+                ? new SavedWorldProvider(_display, _input, _pathToSaveFolder)
+                : new ManualWorldProvider(_display, _input, _pathToSaveFolder);
         }
         
         public void PlayGame()
@@ -50,7 +44,6 @@ namespace GameOfLife
             {
                 producer.MakeNextGeneration();
                 _display.ShowWorld(_world, _displayMillisecondSleep);
-                
                 if (_input.CheckForBreak()) break;
             }
         } 
