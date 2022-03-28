@@ -20,7 +20,7 @@ namespace GameOfLifeTests.WorldSourcingTests
             var generator = new WorldGenerator(display, input);
             
             // Act
-            var actualWorld = generator.GetWorldFromManualInputs();
+            var actualWorld = generator.RetrieveWorld();
             var actual = actualWorld.GetType();
             var comparisonWorld = new World(1, 1);
             
@@ -62,7 +62,7 @@ namespace GameOfLifeTests.WorldSourcingTests
             var generator = new WorldGenerator(display, input);
 
             // Act 
-            var actualWorld = generator.GetWorldFromManualInputs();
+            var actualWorld = generator.RetrieveWorld();
             var prompt1 = output.FakeOutput[0];
             var prompt2 = output.FakeOutput[1];
             var prompt3 = output.FakeOutput[2];
@@ -105,7 +105,6 @@ namespace GameOfLifeTests.WorldSourcingTests
             
         }
 
-
         [Theory]
         [MemberData(nameof(GetInputs))]
         public void GivenValidInputsInSequence_GetWorldFromManualInputs_CanReturnAWorldWithDesignatedCellsAsAlive
@@ -116,7 +115,7 @@ namespace GameOfLifeTests.WorldSourcingTests
             var display = new Display(output);
             var input = new TestInput(userInput);
             var generator = new WorldGenerator(display, input);
-            var world = generator.GetWorldFromManualInputs();
+            var world = generator.RetrieveWorld();
 
             // Act 
             var numberOfWorldCells = world.Cells.Count;

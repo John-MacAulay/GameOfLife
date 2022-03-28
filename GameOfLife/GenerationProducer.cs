@@ -9,7 +9,7 @@ namespace GameOfLife
         private World World { get; }
 
         private List<List<Position>> HistoricalLivePositionsLists { get; set; }
-        
+
         public GenerationProducer(World world)
         {
             World = world;
@@ -25,12 +25,14 @@ namespace GameOfLife
             CheckForWorldOscillation();
         }
 
+
         private void CheckForWorldOscillation()
         {
             if (World.Periodicity != null)
             {
                 return;
             }
+
             int? periodicity = null;
             int? generationStartOfPeriodicity = null;
             var isUnique = true;
@@ -56,7 +58,7 @@ namespace GameOfLife
             }
             else
             {
-                periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity-1;
+                periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity - 1;
             }
 
             if (periodicity != null)

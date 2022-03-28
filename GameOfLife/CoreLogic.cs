@@ -13,8 +13,7 @@ namespace GameOfLife
         private IWorldSource _worldSource;
         private World World { get; set; }
         private readonly string _pathToSaveFolder;
-
-
+        
         public CoreLogic(IOutput output, IInput input, int displayBeatTime,
             string pathToSaveFolder)
         {
@@ -27,6 +26,8 @@ namespace GameOfLife
         public void LogicRun()
         {
             ChooseWhereToSourceWorld();
+            World = _worldSource.RetrieveWorld();
+            SaveWorldIfRequired();
             PlayGame();
         }
 
@@ -36,12 +37,11 @@ namespace GameOfLife
             var load = _input.GetText().ToLower();
              _worldSource =  load == "l"
                 ? new SavedWorldSource(_display, _input, _pathToSaveFolder)
-                : new ManualWorldSource(_display, _input, _pathToSaveFolder);
+                : new WorldGenerator(_display, _input);
         }
         
         public void PlayGame()
         {
-            World = _worldSource.RetrieveWorld();
             _display.ShowWorld(World, _displayBeatTime);
             var producer = new GenerationProducer(World);
             while (!World.IsEmpty())
@@ -51,6 +51,18 @@ namespace GameOfLife
                 if (_input.CheckForBreak()) break;
             }
         } 
+        
+        
+        private void SaveWorldIfRequired()
+        {
+            _display.PromptForCheckIfSaveWorld();
+            var response = _input.GetText().ToLower();
+            if (response is not ("y" or "yes")) return;
+            _display.PromptForSaveName();
+            var nameToSaveUnder = _input.GetText();
+            var saver = new WorldFileSaver(World, _pathToSaveFolder);
+            saver.SaveJsonLocal(nameToSaveUnder);
+        }
         
     }
 }

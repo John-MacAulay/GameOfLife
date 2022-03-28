@@ -15,12 +15,12 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new[] {"l", "1"});
+            var testInput = new TestInput(new[] {"l", "1","n"});
             var core = new CoreLogic(testOutput, testInput, DisplayBeatTime, _testFolder);
             core.LogicRun();
 
             // Act 
-            var actual = testOutput.FakeOutput[11];
+            var actual = testOutput.FakeOutput[12];
 
             // Expected 
             var expected = $"{Environment.NewLine} Generation " +

@@ -5,7 +5,7 @@ using GameOfLife.WorldComponents;
 
 namespace GameOfLife.WorldSourcing
 {
-    public class WorldGenerator
+    public class WorldGenerator : IWorldSource
     {
         private readonly IInput _input;
         private readonly Display _display;
@@ -17,7 +17,7 @@ namespace GameOfLife.WorldSourcing
             _display = display;
         }
 
-        public World GetWorldFromManualInputs()
+        public World RetrieveWorld()
         {
             var lengthAsInt = GetWorldParameter("length");
             var heightAsInt = GetWorldParameter("height");

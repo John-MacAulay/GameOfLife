@@ -10,8 +10,7 @@ namespace GameOfLifeTests.WorldSourcingTests
     public class SavedWorldSourceTests
     {
         private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
-       
-      
+
         [Fact]
         public void GivenValidInputs_SavedWorldSource_RetrieveWorld_WillReturnWorldCorrectly()
         {
