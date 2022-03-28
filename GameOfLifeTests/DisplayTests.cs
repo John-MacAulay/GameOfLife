@@ -2,7 +2,7 @@ using System;
 using GameOfLife;
 using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
-using GameOfLifeTests.TestUserInterfaces;
+using GameOfLifeTests.TestUserInteractions;
 using Xunit;
 
 namespace GameOfLifeTests

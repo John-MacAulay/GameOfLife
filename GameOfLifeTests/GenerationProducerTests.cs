@@ -323,5 +323,51 @@ namespace GameOfLifeTests
             // Assert
             Assert.Equal(isAliveAtNextGen, cellToCheck.IsAlive);
         }
+
+        [Fact]
+        public void
+            MakeNextGeneration_WhenWorldCoalescesToRepeatingPattern_CorrectlyUpdatesWorldGenerationStartOfPeriodicityAndPeriodicity()
+        {
+            // Arrange 
+            var world = new World(9, 9);
+            var positionsAliveAtStartGeneration = new List<Position>()
+            {
+                new(1, 1),
+                new(1, 2),
+                new(2, 1),
+                new(2, 2),
+                new(3, 3),
+                new(3, 4),
+                new(4, 3),
+                new(4, 4),
+            };
+
+            var cellToMakeLive =
+                positionsAliveAtStartGeneration.Select(position => world.CellAtThisWorldPosition(position))
+                    .ToList();
+            foreach (var cell in cellToMakeLive)
+            {
+                cell.MakeCellAlive();
+            }
+
+            var nextGen = new GenerationProducer(world);
+            nextGen.MakeNextGeneration();
+            nextGen.MakeNextGeneration();
+            nextGen.MakeNextGeneration();
+            nextGen.MakeNextGeneration();
+            nextGen.MakeNextGeneration();
+            nextGen.MakeNextGeneration();
+
+            // Act
+            var periodicity = world.Periodicity;
+            var startOfPeriodicity = world.GenerationStartOfPeriodicity;
+
+            // Expected
+            const int expectedPeriodicity = 2;
+            const int expectedStart = 0;
+
+            Assert.Equal(expectedPeriodicity, periodicity);
+            Assert.Equal(expectedStart, startOfPeriodicity);
+        }
     }
 }

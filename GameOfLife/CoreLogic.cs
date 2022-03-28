@@ -1,6 +1,5 @@
 
 using GameOfLife.UserInteractions;
-using GameOfLife.UserInterfaces;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
 
@@ -12,7 +11,7 @@ namespace GameOfLife
         private readonly Display _display;
         private readonly int _displayBeatTime;
         private IWorldSource _worldSource;
-        private World _world;
+        private World World { get; set; }
         private readonly string _pathToSaveFolder;
 
 
@@ -42,13 +41,13 @@ namespace GameOfLife
         
         public void PlayGame()
         {
-            _world = _worldSource.RetrieveWorld();
-            _display.ShowWorld(_world, _displayBeatTime);
-            var producer = new GenerationProducer(_world);
-            while (!_world.IsEmpty())
+            World = _worldSource.RetrieveWorld();
+            _display.ShowWorld(World, _displayBeatTime);
+            var producer = new GenerationProducer(World);
+            while (!World.IsEmpty())
             {
                 producer.MakeNextGeneration();
-                _display.ShowWorld(_world, _displayBeatTime);
+                _display.ShowWorld(World, _displayBeatTime);
                 if (_input.CheckForBreak()) break;
             }
         } 

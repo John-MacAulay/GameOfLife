@@ -1,10 +1,32 @@
+using System;
 using GameOfLife;
-using Microsoft.VisualBasic;
+using GameOfLifeTests.TestUserInteractions;
 using Xunit;
 
 namespace GameOfLifeTests
 {
     public class CoreLogicTest
     {
+        private readonly string _testFolder = $@"..//..//..//..//./TestSavedWorlds/";
+        private const int DisplayBeatTime = 1;
+
+        [Fact]
+        public void CoreLogicRun_WhenGivenAppropriateInputs_LoadAndRunGame()
+        {
+            // Arrange
+            var testOutput = new TestOutput();
+            var testInput = new TestInput(new[] {"l", "1"});
+            var core = new CoreLogic(testOutput, testInput, DisplayBeatTime, _testFolder);
+            core.LogicRun();
+
+            // Act 
+            var actual = testOutput.FakeOutput[11];
+
+            // Expected 
+            var expected = $"{Environment.NewLine} Generation " +
+                           $"0 {Environment.NewLine}{Environment.NewLine} · ·{Environment.NewLine}" +
+                           $" ◉ ◉{Environment.NewLine}{Environment.NewLine} Press 'q' to quit.";
+            Assert.Equal(expected, actual);
+        }
     }
 }

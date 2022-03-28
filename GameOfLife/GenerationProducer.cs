@@ -18,11 +18,11 @@ namespace GameOfLife
 
         public void MakeNextGeneration()
         {
+            World.IncrementGenerationNumber();
             ResetCurrentLiveNeighboursOfAllCellsToZero();
             UpdateAllCellsNumberOfLiveNeighbours();
             ApplyRulesForNextGenerationLife();
             CheckForWorldOscillation();
-            World.IncrementGenerationNumber();
         }
 
         private void CheckForWorldOscillation()
@@ -56,7 +56,7 @@ namespace GameOfLife
             }
             else
             {
-                periodicity = HistoricalLivePositionsLists.Count - 1 - generationStartOfPeriodicity;
+                periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity-1;
             }
 
             if (periodicity != null)

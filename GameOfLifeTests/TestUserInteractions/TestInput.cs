@@ -1,6 +1,6 @@
-using GameOfLife.UserInterfaces;
+using GameOfLife.UserInteractions;
 
-namespace GameOfLifeTests.TestUserInterfaces
+namespace GameOfLifeTests.TestUserInteractions
 {
     public class TestInput : IInput
     {

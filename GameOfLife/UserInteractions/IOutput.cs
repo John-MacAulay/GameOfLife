@@ -1,4 +1,4 @@
-namespace GameOfLife.UserInterfaces
+namespace GameOfLife.UserInteractions
 {
     public interface IOutput
     {

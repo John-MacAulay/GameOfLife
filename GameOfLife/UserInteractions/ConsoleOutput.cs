@@ -1,6 +1,6 @@
 using System;
 
-namespace GameOfLife.UserInterfaces
+namespace GameOfLife.UserInteractions
 {
     public class ConsoleOutput : IOutput
     {

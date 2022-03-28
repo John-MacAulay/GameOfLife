@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using GameOfLife.UserInterfaces;
+using GameOfLife.UserInteractions;
 
 namespace GameOfLife
 {

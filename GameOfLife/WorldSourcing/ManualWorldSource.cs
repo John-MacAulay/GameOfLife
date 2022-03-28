@@ -1,5 +1,4 @@
 using GameOfLife.UserInteractions;
-using GameOfLife.UserInterfaces;
 using GameOfLife.WorldComponents;
 
 namespace GameOfLife.WorldSourcing
