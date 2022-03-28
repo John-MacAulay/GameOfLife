@@ -109,5 +109,12 @@ namespace GameOfLife.UserInteractions
         {
             _output.PrintText($" Please enter the number of the saved game file you wish to load.");
         }
+
+        public void SimulationEnds(World world)
+        {
+            _output.PrintText(world.IsEmpty()
+                ? " Simulation ended because world is empty."
+                : " Simulation ended at users request.");
+        }
     }
 }

@@ -50,6 +50,8 @@ namespace GameOfLife
                 _display.ShowWorld(World, _displayBeatTime);
                 if (_input.CheckForBreak()) break;
             }
+
+            _display.SimulationEnds(World);
         } 
         
         
