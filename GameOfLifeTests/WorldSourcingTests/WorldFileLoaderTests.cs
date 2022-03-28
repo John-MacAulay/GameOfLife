@@ -10,7 +10,6 @@ namespace GameOfLifeTests.WorldSourcingTests
 {
     public class WorldFileLoaderTests
     {
-
         private static string UseThisTestFolder()
         {
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -32,7 +31,6 @@ namespace GameOfLifeTests.WorldSourcingTests
                 world.CellAtThisWorldPosition(new Position(2, 0)),
                 world.CellAtThisWorldPosition(new Position(0, 1)),
                 world.CellAtThisWorldPosition(new Position(4, 0))
-                
             };
             foreach (var cell in cellsToBeAlive)
             {
@@ -65,15 +63,14 @@ namespace GameOfLifeTests.WorldSourcingTests
                 Assert.Contains(actualLivePositionsInOrder, actualPosition => actualPosition == expectedLivePosition);
             }
 
-           
+
             Assert.NotNull(actualReturnedWorld);
-            Assert.True(actualTypeOfObject  == typeof(World) );
+            Assert.True(actualTypeOfObject == typeof(World));
             Assert.Equal(expectedNumberOfCells, actualCellCount);
             for (var i = 0; i < expectedLivePositionsInOrder.Count; i++)
             {
-                Assert.Equal(expectedLivePositionsInOrder[i],actualLivePositionsInOrder[i]);
+                Assert.Equal(expectedLivePositionsInOrder[i], actualLivePositionsInOrder[i]);
             }
         }
-
     }
 }

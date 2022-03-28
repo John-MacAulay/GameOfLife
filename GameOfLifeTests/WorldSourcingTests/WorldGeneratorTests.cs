@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameOfLife;
+
 using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
@@ -15,15 +15,15 @@ namespace GameOfLifeTests.WorldSourcingTests
         public void GivenValidInputsInSequence_GetWorldFromManualInputsWillReturnAValidWorldOfAppropriateSize()
         {
             // Arrange 
-            var display = new Display( new TestOutput());
-            var input = new TestInput(new[] {"10","15","q","n"});
+            var display = new Display(new TestOutput());
+            var input = new TestInput(new[] {"10", "15", "q", "n"});
             var generator = new WorldGenerator(display, input);
-            
+
             // Act
             var actualWorld = generator.RetrieveWorld();
             var actual = actualWorld.GetType();
             var comparisonWorld = new World(1, 1);
-            
+
             // Expected 
             var expectedTypeOfObject = comparisonWorld.GetType();
             const int expectedLengthOfCreatedWorld = 10;
@@ -37,27 +37,26 @@ namespace GameOfLifeTests.WorldSourcingTests
         {
             yield return new object[]
             {
-               new[] {"0","some invalid input again for length", "12", "invalid input for height","8","q","n"}
+                new[] {"0", "some invalid input again for length", "12", "invalid input for height", "8", "q", "n"}
             };
             yield return new object[]
             {
-                new[] {"-1","invalid input again for length", "12", "invalid Input for height","8","q","n"}
+                new[] {"-1", "invalid input again for length", "12", "invalid Input for height", "8", "q", "n"}
             };
             yield return new object[]
             {
-                new[] { "[invalid input] zero and negatives invalid for height too", "-2", "12",  "-1", "8","q","n"}
+                new[] {"[invalid input] zero and negatives invalid for height too", "-2", "12", "-1", "8", "q", "n"}
             };
         }
 
         [Theory]
         [MemberData(nameof(GetTestInputs))]
-        
         public void GivenInValidInputsInSequence_GetWorldFromManualInputsWillLoopUntilValidInputsThenReturnValidWorld
-        (string [] userInputs)
+            (string[] userInputs)
         {
             // Arrange 
             var output = new TestOutput();
-            var display = new Display( output);
+            var display = new Display(output);
             var input = new TestInput(userInputs);
             var generator = new WorldGenerator(display, input);
 
@@ -77,12 +76,12 @@ namespace GameOfLifeTests.WorldSourcingTests
             const string expectedFifthPrompt = "Please enter the grid height for this Game of Life.";
             const int expectedLengthOfCreatedWorld = 12;
             const int expectedHeightOfCreatedWorld = 8;
-            
-            Assert.Equal(expectedFirstPrompt,prompt1);
-            Assert.Equal(expectedSecondPrompt,prompt2);
+
+            Assert.Equal(expectedFirstPrompt, prompt1);
+            Assert.Equal(expectedSecondPrompt, prompt2);
             Assert.Equal(expectedThirdPrompt, prompt3);
-            Assert.Equal(expectedFourthPrompt, prompt4); 
-            Assert.Equal(expectedFifthPrompt, prompt5); 
+            Assert.Equal(expectedFourthPrompt, prompt4);
+            Assert.Equal(expectedFifthPrompt, prompt5);
             Assert.Equal(expectedHeightOfCreatedWorld, actualWorld.Height);
             Assert.Equal(expectedLengthOfCreatedWorld, actualWorld.Length);
         }
@@ -91,18 +90,17 @@ namespace GameOfLifeTests.WorldSourcingTests
         {
             yield return new object[]
             {
-                new[]{"9","8", "3,2", "2,2","4,4","q","n"},
+                new[] {"9", "8", "3,2", "2,2", "4,4", "q", "n"},
                 72,
                 3
             };
-            
+
             yield return new object[]
             {
-                new[]{"15","20", "3,2", "12,10" ,"invalid", "2,2","4,4", "13,10", "q","n"},
+                new[] {"15", "20", "3,2", "12,10", "invalid", "2,2", "4,4", "13,10", "q", "n"},
                 300,
                 5
             };
-            
         }
 
         [Theory]
@@ -119,13 +117,11 @@ namespace GameOfLifeTests.WorldSourcingTests
 
             // Act 
             var numberOfWorldCells = world.Cells.Count;
-            var numberOfLiveSeedCells = world.Cells.Where(cell => cell.IsAlive).ToList().Count; 
-            
+            var numberOfLiveSeedCells = world.Cells.Where(cell => cell.IsAlive).ToList().Count;
+
             // Assert
-            Assert.Equal(expectedCells,numberOfWorldCells);
+            Assert.Equal(expectedCells, numberOfWorldCells);
             Assert.Equal(expectedLiveSeedCells, numberOfLiveSeedCells);
-            
-            
         }
     }
 }

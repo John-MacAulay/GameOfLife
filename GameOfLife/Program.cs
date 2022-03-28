@@ -11,13 +11,13 @@ namespace GameOfLife
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var saveFolder = $"{folderPath}/Documents/GameOfLifeSaves";
             Directory.CreateDirectory($@"{saveFolder}");
-            
+
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
             var displayBeatTime = 1000;
-            if (args.Length > 0 )
+            if (args.Length > 0)
             {
-                if (int.TryParse(args[0], out  displayBeatTime))
+                if (int.TryParse(args[0], out displayBeatTime))
                 {
                     if (displayBeatTime < 1)
                     {
@@ -25,6 +25,7 @@ namespace GameOfLife
                     }
                 }
             }
+
             var core = new CoreLogic(output, input, displayBeatTime, saveFolder);
             core.LogicRun();
         }

@@ -9,7 +9,6 @@ namespace GameOfLifeTests.WorldSourcingTests
 {
     public class WorldFileSaverTests
     {
-  
         private static string UseThisTestFolder()
         {
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -28,8 +27,9 @@ namespace GameOfLifeTests.WorldSourcingTests
             {
                 File.Delete(filePathToCheck);
             }
+
             Assert.False(File.Exists(filePathToCheck));
-            
+
             var world = new World(2, 2);
             var cellsToBeAlive = new List<Cell>()
             {
@@ -40,7 +40,7 @@ namespace GameOfLifeTests.WorldSourcingTests
             {
                 cell.MakeCellAlive();
             }
-            
+
             var worldFileSave = new WorldFileSaver(world, testFolder);
             worldFileSave.SaveJsonLocal("TinyWorld");
 

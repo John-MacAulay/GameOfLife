@@ -61,11 +61,9 @@ namespace GameOfLife
                 periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity - 1;
             }
 
-            if (periodicity != null)
-            {
-                World.SetPeriodicity(periodicity);
-                World.SetPeriodicityStartGeneration(generationStartOfPeriodicity);
-            }
+            if (periodicity == null) return;
+            World.SetPeriodicity(periodicity);
+            World.SetPeriodicityStartGeneration(generationStartOfPeriodicity);
         }
 
         private void ApplyRulesForNextGenerationLife()

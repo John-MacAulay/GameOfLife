@@ -1,4 +1,3 @@
-
 using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
@@ -13,7 +12,7 @@ namespace GameOfLife
         private IWorldSource _worldSource;
         private World World { get; set; }
         private readonly string _pathToSaveFolder;
-        
+
         public CoreLogic(IOutput output, IInput input, int displayBeatTime,
             string pathToSaveFolder)
         {
@@ -35,11 +34,11 @@ namespace GameOfLife
         {
             _display.OfferChoiceForGeneratingWorld();
             var load = _input.GetText().ToLower();
-             _worldSource =  load == "l"
+            _worldSource = load == "l"
                 ? new SavedWorldSource(_display, _input, _pathToSaveFolder)
                 : new WorldGenerator(_display, _input);
         }
-        
+
         public void PlayGame()
         {
             _display.ShowWorld(World, _displayBeatTime);
@@ -52,8 +51,7 @@ namespace GameOfLife
             }
 
             _display.SimulationEnds(World);
-        } 
-        
+        }
         
         private void SaveWorldIfRequired()
         {
@@ -65,6 +63,5 @@ namespace GameOfLife
             var saver = new WorldFileSaver(World, _pathToSaveFolder);
             saver.SaveJsonLocal(nameToSaveUnder);
         }
-        
     }
 }

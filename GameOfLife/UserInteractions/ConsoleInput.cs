@@ -11,8 +11,8 @@ namespace GameOfLife.UserInteractions
         }
 
         public bool CheckForBreak()
-        { 
-           return  Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Q;
+        {
+            return Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Q;
         }
     }
 }

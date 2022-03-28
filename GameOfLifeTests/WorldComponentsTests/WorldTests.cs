@@ -41,7 +41,11 @@ namespace GameOfLifeTests.WorldComponentsTests
             // Arrange 
             var world = new World(10, 15);
 
+            // Act
             var actual = world.IsEmpty();
+
+            //Assert
+            Assert.True(actual);
         }
     }
 }

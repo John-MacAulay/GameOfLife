@@ -11,10 +11,10 @@ namespace GameOfLifeTests.WorldComponentsTests
             // Arrange 
             var position = new Position(0, 0);
             var cell = new Cell(position);
-            
+
             // Act 
             var actual = cell.IsAlive;
-            
+
             // Assert
             Assert.False(actual);
         }

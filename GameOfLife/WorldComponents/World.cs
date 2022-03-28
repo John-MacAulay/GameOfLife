@@ -8,7 +8,7 @@ namespace GameOfLife.WorldComponents
     {
         public int CurrentGenerationNumber { get; private set; }
         public List<Cell> Cells { get; }
-        
+
         public int? Periodicity { get; private set; }
         public int? GenerationStartOfPeriodicity { get; private set; }
 
@@ -30,7 +30,7 @@ namespace GameOfLife.WorldComponents
                 }
             }
         }
-        
+
         [JsonConstructor]
         public World(int length, int height, List<Cell> cells, int currentGenerationNumber,
             int? periodicity, int? generationStartOfPeriodicity)
@@ -65,7 +65,7 @@ namespace GameOfLife.WorldComponents
 
         public List<Position> RetrieveLiveCellPositions()
         {
-            var liveCell =  Cells.Where(cell => cell.IsAlive == true).ToList();
+            var liveCell = Cells.Where(cell => cell.IsAlive == true).ToList();
             return liveCell.Select(cell => cell.Position).ToList();
         }
 

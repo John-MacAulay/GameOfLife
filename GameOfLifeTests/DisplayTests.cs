@@ -52,7 +52,7 @@ namespace GameOfLifeTests
             Assert.Equal(expectedPhase2, actual2);
 
             Assert.Equal(expectedClear, actualClearScreen3);
-            
+
             var expectedPhase3 = $"{Environment.NewLine} Generation 0 {Environment.NewLine}{Environment.NewLine}" +
                                  $" {_openCircle} · ·{Environment.NewLine} · · ·{Environment.NewLine} · {_openCircle} ·" +
                                  $"{Environment.NewLine}{Environment.NewLine} Press 'q' to quit.";

@@ -19,6 +19,7 @@ namespace GameOfLife.WorldSourcing
             _display = display;
             _pathToSavedGamesFolder = pathToSavedGamesFolder;
         }
+
         public World RetrieveWorld()
         {
             var fileNamesToDisplay = RetrieveFileNamesToDisplay();
@@ -28,14 +29,19 @@ namespace GameOfLife.WorldSourcing
             _world = reader.LoadJsonLocal(fileNamesToDisplay[saveGameNumber - 1]);
             return _world;
         }
+
         private List<string> RetrieveFileNamesToDisplay()
         {
             var savedGameFiles = System.IO.Directory.GetFiles(_pathToSavedGamesFolder, "*.json");
 
-            return (from filename in savedGameFiles let indexToCutAt =
-                    filename.LastIndexOf("/", StringComparison.Ordinal) select filename[(indexToCutAt + 1)..]
-                into trimmedFile select trimmedFile.Remove(trimmedFile.Length - 5)).ToList();
+            return (from filename in savedGameFiles
+                let indexToCutAt =
+                    filename.LastIndexOf("/", StringComparison.Ordinal)
+                select filename[(indexToCutAt + 1)..]
+                into trimmedFile
+                select trimmedFile.Remove(trimmedFile.Length - 5)).ToList();
         }
+
         private int LetUserChooseSavedFileToLoad(int saveGameNumber, List<string> fileNamesToDisplay)
         {
             var choiceIsInt = false;
@@ -48,6 +54,6 @@ namespace GameOfLife.WorldSourcing
             }
 
             return saveGameNumber;
-}
+        }
     }
 }

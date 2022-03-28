@@ -15,7 +15,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new[] {"l", "1","n"});
+            var testInput = new TestInput(new[] {"l", "1", "n"});
             var core = new CoreLogic(testOutput, testInput, DisplayBeatTime, _testFolder);
             core.LogicRun();
 
@@ -34,17 +34,16 @@ namespace GameOfLifeTests
         {
             // Arrange
             var testOutput = new TestOutput();
-            var testInput = new TestInput(new[] {"anything but l", "10","10","q","y","Empty World"});
+            var testInput = new TestInput(new[] {"anything but l", "10", "10", "q", "y", "Empty World"});
             var core = new CoreLogic(testOutput, testInput, DisplayBeatTime, _testFolder);
             core.LogicRun();
-            
+
             // Act
             var actual = testOutput.FakeOutput[13];
-            
+
             // Expected 
             var expected = " Simulation ended because world is empty.";
-            Assert.Equal(expected,actual);
-
+            Assert.Equal(expected, actual);
         }
     }
 }

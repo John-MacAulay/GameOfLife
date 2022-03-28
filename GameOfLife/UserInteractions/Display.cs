@@ -71,7 +71,7 @@ namespace GameOfLife.UserInteractions
 
                 worldAsGrid.Append($"{Environment.NewLine} Press 'q' to quit.");
                 _output.PrintText(worldAsGrid.ToString());
-                Thread.Sleep(displayBeatTime / displayPhases.Count );
+                Thread.Sleep(displayBeatTime / displayPhases.Count);
             }
         }
 

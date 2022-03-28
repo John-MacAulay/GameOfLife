@@ -1,4 +1,3 @@
-using GameOfLife;
 using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
@@ -17,15 +16,15 @@ namespace GameOfLifeTests.WorldSourcingTests
             // Arrange
             var testOutput = new TestOutput();
             var display = new Display(testOutput);
-            var testInput = new TestInput(new[]{ "1"});
+            var testInput = new TestInput(new[] {"1"});
             var source = new SavedWorldSource(display, testInput, _testFolder);
-            
+
             // Act
             var world = source.RetrieveWorld();
             var returnedObjectType = world.GetType();
-            
+
             // Assert
-            Assert.True(returnedObjectType  == typeof(World) );
+            Assert.True(returnedObjectType == typeof(World));
         }
     }
 }
