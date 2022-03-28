@@ -1,6 +1,8 @@
 using GameOfLife;
+using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
+using GameOfLifeTests.TestUserInterfaces;
 using Xunit;
 
 namespace GameOfLifeTests.WorldSourcingTests

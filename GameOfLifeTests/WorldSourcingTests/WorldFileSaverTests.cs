@@ -57,7 +57,8 @@ namespace GameOfLifeTests.WorldSourcingTests
                                     "{\"Row\":0,\"Column\":1}},{\"NumberOfLiveNeighbours\":0,\"IsAlive\":true," +
                                     "\"Position\":{\"Row\":1,\"Column\":0}},{\"NumberOfLiveNeighbours\":0," +
                                     "\"IsAlive\":true,\"Position\":{\"Row\":1,\"Column\":1}}]," +
-                                    "\"Periodicity\":null,\"Length\":2,\"Height\":2}\n";
+                                    "\"Periodicity\":null,\"GenerationStartOfPeriodicity\":null," +
+                                    "\"Length\":2,\"Height\":2}\n";
             Assert.True(File.Exists(filePathToCheck));
             Assert.Equal(expected, actual);
         }

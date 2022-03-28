@@ -1,6 +1,8 @@
 using System;
 using GameOfLife;
+using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
+using GameOfLifeTests.TestUserInterfaces;
 using Xunit;
 
 namespace GameOfLifeTests

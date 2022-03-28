@@ -6,7 +6,7 @@ using System.Threading;
 using GameOfLife.UserInterfaces;
 using GameOfLife.WorldComponents;
 
-namespace GameOfLife
+namespace GameOfLife.UserInteractions
 {
     public class Display
     {
@@ -29,13 +29,13 @@ namespace GameOfLife
         public void PromptForLiveCellSeedPosition()
         {
             _output.PrintText(
-                $"Please enter the next position of a live cell within the bounds of your Game of Life grid. " +
+                $"{Environment.NewLine} Please enter the next position of a live cell within the bounds of your Game of Life grid. " +
                 $"This should be entered as the row starting from 0, and the column starting from 0, seperated {Environment.NewLine}" +
                 $"by a comma.  ie.   2,3  means there is a live cell seed at column 2, row 3. {Environment.NewLine}" +
                 $"If you have finished entering live cells enter 'q' to quit");
         }
 
-        public void ShowWorld(World world, int millisecondsSleep)
+        public void ShowWorld(World world, int displayBeatTime)
         {
             var displayPhases = new List<string>()
             {
@@ -65,11 +65,14 @@ namespace GameOfLife
 
                 if (world.Periodicity != null)
                 {
-                    worldAsGrid.Append($"{Environment.NewLine} Periodicity {world.Periodicity} {Environment.NewLine}");
+                    worldAsGrid.Append($"{Environment.NewLine} Live Cell pattern repeats from Generation number:" +
+                                       $" {world.GenerationStartOfPeriodicity} {Environment.NewLine}");
+                    worldAsGrid.Append($" every {world.Periodicity} generations. {Environment.NewLine}");
                 }
+
                 worldAsGrid.Append($"{Environment.NewLine} Press 'q' to quit.");
                 _output.PrintText(worldAsGrid.ToString());
-                Thread.Sleep(millisecondsSleep / displayPhases.Count );
+                Thread.Sleep(displayBeatTime / displayPhases.Count );
             }
         }
 

@@ -14,18 +14,18 @@ namespace GameOfLife
             
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
-            var displayTime = 1000;
+            var displayBeatTime = 1000;
             if (args.Length > 0 )
             {
-                if (int.TryParse(args[0], out  displayTime))
+                if (int.TryParse(args[0], out  displayBeatTime))
                 {
-                    if (displayTime < 1)
+                    if (displayBeatTime < 1)
                     {
-                        displayTime = 1000;
+                        displayBeatTime = 1000;
                     }
                 }
             }
-            var core = new CoreLogic(output, input, displayTime, saveFolder);
+            var core = new CoreLogic(output, input, displayBeatTime, saveFolder);
             core.LogicRun();
         }
     }

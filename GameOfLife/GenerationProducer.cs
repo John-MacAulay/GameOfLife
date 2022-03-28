@@ -32,6 +32,7 @@ namespace GameOfLife
                 return;
             }
             int? periodicity = null;
+            int? generationStartOfPeriodicity = null;
             var isUnique = true;
             var currentLiveCellPositions = World.RetrieveLiveCellPositions();
             if (HistoricalLivePositionsLists.Count == 0)
@@ -45,6 +46,7 @@ namespace GameOfLife
                              .Where(list => !currentLiveCellPositions.Except(list).Any()))
                 {
                     isUnique = false;
+                    generationStartOfPeriodicity = HistoricalLivePositionsLists.IndexOf(list);
                 }
             }
 
@@ -54,12 +56,13 @@ namespace GameOfLife
             }
             else
             {
-                periodicity = HistoricalLivePositionsLists.Count - 1;
+                periodicity = HistoricalLivePositionsLists.Count - 1 - generationStartOfPeriodicity;
             }
 
             if (periodicity != null)
             {
                 World.SetPeriodicity(periodicity);
+                World.SetPeriodicityStartGeneration(generationStartOfPeriodicity);
             }
         }
 

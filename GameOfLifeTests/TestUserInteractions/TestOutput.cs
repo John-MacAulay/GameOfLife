@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using GameOfLife;
 using GameOfLife.UserInterfaces;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.TestUserInterfaces
 {
     public class TestOutput : IOutput
     {

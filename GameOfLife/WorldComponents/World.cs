@@ -10,6 +10,7 @@ namespace GameOfLife.WorldComponents
         public List<Cell> Cells { get; }
         
         public int? Periodicity { get; private set; }
+        public int? GenerationStartOfPeriodicity { get; private set; }
 
         public int Length { get; }
         public int Height { get; }
@@ -31,13 +32,15 @@ namespace GameOfLife.WorldComponents
         }
         
         [JsonConstructor]
-        public World(int length, int height, List<Cell> cells, int currentGenerationNumber, int? periodicity)
+        public World(int length, int height, List<Cell> cells, int currentGenerationNumber,
+            int? periodicity, int? generationStartOfPeriodicity)
         {
             Height = height;
             Length = length;
             Cells = cells;
             CurrentGenerationNumber = currentGenerationNumber;
             Periodicity = periodicity;
+            GenerationStartOfPeriodicity = generationStartOfPeriodicity;
         }
 
         public bool IsEmpty()
@@ -64,6 +67,11 @@ namespace GameOfLife.WorldComponents
         {
             var liveCell =  Cells.Where(cell => cell.IsAlive == true).ToList();
             return liveCell.Select(cell => cell.Position).ToList();
+        }
+
+        public void SetPeriodicityStartGeneration(int? generationStartOfPeriodicity)
+        {
+            GenerationStartOfPeriodicity = generationStartOfPeriodicity;
         }
     }
 }
