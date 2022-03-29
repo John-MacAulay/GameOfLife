@@ -53,8 +53,8 @@ namespace GameOfLifeTests.WorldSourcingTests
 
             const string expected = "{\"CurrentGenerationNumber\":0,\"Cells\":[" +
                                     "{\"Position\":{\"Column\":0,\"Row\":0},\"IsAlive\":false," +
-                                    "\"NumberOfLiveNeighbours\":0},"
-                                    + "{\"Position\":{\"Column\":1,\"Row\":0},\"IsAlive\":false," +
+                                    "\"NumberOfLiveNeighbours\":0}," +
+                                    "{\"Position\":{\"Column\":1,\"Row\":0},\"IsAlive\":false," +
                                     "\"NumberOfLiveNeighbours\":0}," +
                                     "{\"Position\":{\"Column\":0,\"Row\":1},\"IsAlive\":true," +
                                     "\"NumberOfLiveNeighbours\":0},"+

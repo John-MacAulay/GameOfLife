@@ -23,7 +23,7 @@ namespace GameOfLife.WorldSourcing
             var heightAsInt = GetWorldParameter("height");
 
             World = new World(lengthAsInt, heightAsInt);
-            ManuallyAddLiveCellPositions();
+            ManuallyMakeLiveCells();
             return World;
         }
 
@@ -45,13 +45,13 @@ namespace GameOfLife.WorldSourcing
             return requiredInt;
         }
 
-        private void ManuallyAddLiveCellPositions()
+        private void ManuallyMakeLiveCells()
         {
             var positionsForLiveCells = new List<Position>();
             var userInputForPosition = "";
             while (userInputForPosition != "q")
             {
-                userInputForPosition = AddNewLiveCellPositionFromUserInput(World, positionsForLiveCells);
+                userInputForPosition = AddNewLiveCellPosition(World, positionsForLiveCells);
             }
 
             foreach (var cellToMakeLive in positionsForLiveCells.Select(position =>
@@ -62,12 +62,12 @@ namespace GameOfLife.WorldSourcing
             }
         }
 
-        private string AddNewLiveCellPositionFromUserInput(World world, ICollection<Position> positionsForLiveCells)
+        private string AddNewLiveCellPosition(World world, ICollection<Position> positionsForLiveCells)
         {
             _display.PromptForLiveCellSeedPosition();
 
             var userInputForPosition = _input.GetText();
-            var validator = new TwoDimensionalWorldPositionValidator(world);
+            var validator = new WorldPositionValidator(world);
             if (validator.TryParseStringToPosition(userInputForPosition))
             {
                 positionsForLiveCells.Add(validator.ValidatedPosition);

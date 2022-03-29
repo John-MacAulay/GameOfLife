@@ -2,17 +2,17 @@ using GameOfLife.WorldComponents;
 
 namespace GameOfLife.WorldSourcing
 {
-    public class TwoDimensionalWorldPositionValidator
+    public class WorldPositionValidator
     {
         private readonly World _world;
         private const int WorldDimensionalParameters = 2;
+        public Position ValidatedPosition { get; private set; }
 
-        public TwoDimensionalWorldPositionValidator(World world)
+        public WorldPositionValidator(World world)
         {
             _world = world;
         }
 
-        public Position ValidatedPosition { get; private set; }
 
         public bool TryParseStringToPosition(string toCheck)
         {
