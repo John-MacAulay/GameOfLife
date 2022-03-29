@@ -4,9 +4,9 @@ namespace GameOfLife.WorldComponents
 {
     public class Cell
     {
-        public int NumberOfLiveNeighbours { get; private set; }
-        public bool IsAlive { get; private set; }
         public Position Position { get;}
+        public bool IsAlive { get; private set; }
+        public int NumberOfLiveNeighbours { get; private set; }
 
         public Cell(Position position)
         {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-
 using GameOfLife.UserInteractions;
 using GameOfLife.WorldComponents;
 using GameOfLife.WorldSourcing;
@@ -12,7 +11,7 @@ namespace GameOfLifeTests.WorldSourcingTests
     public class WorldGeneratorTests
     {
         [Fact]
-        public void GivenValidInputsInSequence_GetWorldFromManualInputsWillReturnAValidWorldOfAppropriateSize()
+        public void GivenValidInputsInSequence_RetrieveWorld_WillReturnAValidWorldOfAppropriateSize()
         {
             // Arrange 
             var display = new Display(new TestOutput());
@@ -51,7 +50,7 @@ namespace GameOfLifeTests.WorldSourcingTests
 
         [Theory]
         [MemberData(nameof(GetTestInputs))]
-        public void GivenInValidInputsInSequence_GetWorldFromManualInputsWillLoopUntilValidInputsThenReturnValidWorld
+        public void GivenInValidInputsInSequence_RetrieveWorld_WillLoopUntilValidInputsThenReturnValidWorld
             (string[] userInputs)
         {
             // Arrange 
@@ -105,7 +104,7 @@ namespace GameOfLifeTests.WorldSourcingTests
 
         [Theory]
         [MemberData(nameof(GetInputs))]
-        public void GivenValidInputsInSequence_GetWorldFromManualInputs_CanReturnAWorldWithDesignatedCellsAsAlive
+        public void GivenValidInputsInSequence_RetrieveWorld_CanReturnAWorldWithDesignatedCellsAsAlive
             (string[] userInput, int expectedCells, int expectedLiveSeedCells)
         {
             // Arrange 

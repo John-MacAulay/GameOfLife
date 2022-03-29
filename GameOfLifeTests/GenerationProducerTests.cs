@@ -4,7 +4,6 @@ using GameOfLife;
 using GameOfLife.WorldComponents;
 using Xunit;
 
-
 namespace GameOfLifeTests
 {
     public class GenerationProducerTests
@@ -256,7 +255,7 @@ namespace GameOfLifeTests
         [Theory]
         [MemberData(nameof(GetInputs4))]
         public void
-            NextGeneration_MakesAnyCellHasLessThanTwoNeighbours_DeadInNextGeneration
+            NextGeneration_MakesAnyCellThatHasLessThanTwoNeighbours_DeadInNextGeneration
             (Position cellPositionUnderTest, List<Position> positionsAliveAtStartGeneration, bool isAliveAtNextGen)
         {
             // Arrange 

@@ -22,11 +22,11 @@ namespace GameOfLife
             ResetCurrentLiveNeighboursOfAllCellsToZero();
             UpdateAllCellsNumberOfLiveNeighbours();
             ApplyRulesForNextGenerationLife();
-            CheckForWorldOscillation();
+            UpdateWorldBasedOnOscillation();
         }
 
 
-        private void CheckForWorldOscillation()
+        private void UpdateWorldBasedOnOscillation()
         {
             if (World.Periodicity != null)
             {

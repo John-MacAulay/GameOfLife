@@ -67,10 +67,10 @@ namespace GameOfLife.WorldSourcing
             _display.PromptForLiveCellSeedPosition();
 
             var userInputForPosition = _input.GetText();
-            var worldPositionValidator = new TwoDimensionalWorldPositionValidator(world);
-            if (worldPositionValidator.TryParseStringToPosition(userInputForPosition))
+            var validator = new TwoDimensionalWorldPositionValidator(world);
+            if (validator.TryParseStringToPosition(userInputForPosition))
             {
-                positionsForLiveCells.Add(worldPositionValidator.ValidatedPosition);
+                positionsForLiveCells.Add(validator.ValidatedPosition);
             }
 
             return userInputForPosition;

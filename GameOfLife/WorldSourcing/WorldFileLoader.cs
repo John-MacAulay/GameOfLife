@@ -7,17 +7,17 @@ namespace GameOfLife.WorldSourcing
 {
     public class WorldFileLoader
     {
-        private readonly string _relativePathToSaveFolder;
+        private readonly string _pathToSaveFolder;
 
-        public WorldFileLoader(string relativePathToSaveFolder)
+        public WorldFileLoader(string pathToSaveFolder)
         {
-            _relativePathToSaveFolder = relativePathToSaveFolder;
+            _pathToSaveFolder = pathToSaveFolder;
         }
 
         public World LoadJsonLocal(string fileName)
         {
             var sb = new StringBuilder();
-            var path = $"{_relativePathToSaveFolder}/{fileName}.json";
+            var path = $"{_pathToSaveFolder}/{fileName}.json";
 
             using (var reader = new StreamReader($@"{path}"))
             {
