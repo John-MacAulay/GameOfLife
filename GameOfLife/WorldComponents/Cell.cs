@@ -14,10 +14,11 @@ namespace GameOfLife.WorldComponents
         }
 
         [JsonConstructor]
-        public Cell(Position position, bool isAlive)
+        public Cell(Position position, bool isAlive, int numberOfLiveNeighbours)
         {
             Position = position;
             IsAlive = isAlive;
+            NumberOfLiveNeighbours = numberOfLiveNeighbours;
         }
         
         public void ResetNumberOfLiveNeighboursToZero()

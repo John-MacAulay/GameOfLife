@@ -51,12 +51,15 @@ namespace GameOfLifeTests.WorldSourcingTests
                 actual = sr.ReadToEnd();
             }
 
-            const string expected = "{\"CurrentGenerationNumber\":0,\"Cells\":[{\"NumberOfLiveNeighbours\":0," +
-                                    "\"IsAlive\":false,\"Position\":{\"Row\":0,\"Column\":0}}," +
-                                    "{\"NumberOfLiveNeighbours\":0,\"IsAlive\":false,\"Position\":" +
-                                    "{\"Row\":0,\"Column\":1}},{\"NumberOfLiveNeighbours\":0,\"IsAlive\":true," +
-                                    "\"Position\":{\"Row\":1,\"Column\":0}},{\"NumberOfLiveNeighbours\":0," +
-                                    "\"IsAlive\":true,\"Position\":{\"Row\":1,\"Column\":1}}]," +
+            const string expected = "{\"CurrentGenerationNumber\":0,\"Cells\":[" +
+                                    "{\"Position\":{\"Column\":0,\"Row\":0},\"IsAlive\":false," +
+                                    "\"NumberOfLiveNeighbours\":0},"
+                                    + "{\"Position\":{\"Column\":1,\"Row\":0},\"IsAlive\":false," +
+                                    "\"NumberOfLiveNeighbours\":0}," +
+                                    "{\"Position\":{\"Column\":0,\"Row\":1},\"IsAlive\":true," +
+                                    "\"NumberOfLiveNeighbours\":0},"+
+                                    "{\"Position\":{\"Column\":1,\"Row\":1},\"IsAlive\":true," +
+                                    "\"NumberOfLiveNeighbours\":0}]," +
                                     "\"Periodicity\":null,\"GenerationStartOfPeriodicity\":null," +
                                     "\"Length\":2,\"Height\":2}\n";
             Assert.True(File.Exists(filePathToCheck));
