@@ -48,7 +48,7 @@ namespace GameOfLife
                              .Where(list => !currentLiveCellPositions.Except(list).Any()))
                 {
                     isUnique = false;
-                    generationStartOfPeriodicity = HistoricalLivePositionsLists.IndexOf(list);
+                    generationStartOfPeriodicity = HistoricalLivePositionsLists.IndexOf(list)+1;
                 }
             }
 
@@ -58,7 +58,15 @@ namespace GameOfLife
             }
             else
             {
-                periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity - 1;
+                if (generationStartOfPeriodicity == 1)
+                {
+                    periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity;
+                    
+                }
+                else
+                {
+                    periodicity = HistoricalLivePositionsLists.Count - generationStartOfPeriodicity +1;
+                }
             }
 
             if (periodicity == null) return;

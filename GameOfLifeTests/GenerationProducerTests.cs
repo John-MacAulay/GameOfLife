@@ -363,7 +363,7 @@ namespace GameOfLifeTests
 
             // Expected
             const int expectedPeriodicity = 2;
-            const int expectedStart = 0;
+            const int expectedStart = 1;
 
             Assert.Equal(expectedPeriodicity, periodicity);
             Assert.Equal(expectedStart, startOfPeriodicity);
