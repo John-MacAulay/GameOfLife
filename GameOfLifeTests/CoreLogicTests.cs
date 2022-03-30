@@ -20,7 +20,7 @@ namespace GameOfLifeTests
             core.LogicRun();
 
             // Act 
-            var actual = testOutput.FakeOutput[13];
+            var actual = testOutput.FakeOutput[12];
 
             // Expected 
             var expected = $"{Environment.NewLine} Generation " +

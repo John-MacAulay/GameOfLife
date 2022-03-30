@@ -26,6 +26,7 @@ namespace GameOfLife
         {
             ChooseWhereToSourceWorld();
             World = _worldSource.RetrieveWorld();
+            _display.ShowWorld(World, _displayBeatTime);
             SaveWorldIfRequired();
             PlayGame();
         }
@@ -41,7 +42,6 @@ namespace GameOfLife
 
         public void PlayGame()
         {
-            _display.ShowWorld(World, _displayBeatTime);
             var producer = new GenerationProducer(World);
             while (!World.IsEmpty())
             {
