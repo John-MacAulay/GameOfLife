@@ -63,7 +63,6 @@ namespace GameOfLifeTests.WorldSourcingTests
                 Assert.Contains(actualLivePositionsInOrder, actualPosition => actualPosition == expectedLivePosition);
             }
 
-
             Assert.NotNull(actualReturnedWorld);
             Assert.True(actualTypeOfObject == typeof(World));
             Assert.Equal(expectedNumberOfCells, actualCellCount);

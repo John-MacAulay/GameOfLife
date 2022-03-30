@@ -138,6 +138,8 @@ namespace GameOfLifeTests
 
             // Assert
             Assert.True(cellToCheck.IsAlive);
+            
+            // there might be too many dependencies for this test
         }
 
         public static IEnumerable<object[]> GetInputs3()
